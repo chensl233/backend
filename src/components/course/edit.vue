@@ -35,14 +35,47 @@
         </Row>
 
         <Row :space="10">
-          <Cell :width="18">
+          <Cell :width="12">
             <FormItem label="课程名" prop="title">
               <input type="text" v-model="course.title" />
             </FormItem>
           </Cell>
           <Cell :width="6">
+            <FormItem label="学分" prop="title">
+              <input type="text" v-model="course.stu_credit" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
             <FormItem label="评论开关" prop="comment_status">
               <Select v-model="course.comment_status" :datas="commentStatus"></Select>
+            </FormItem>
+          </Cell>
+        </Row>
+
+        <Row :space="10">
+          <Cell :width="6">
+            <FormItem label="课程代码" prop="course_code">
+              <input type="text" v-model="course.course_code" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="课程学时" prop="course_hour">
+              <input type="text" v-model="course.course_hour" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="课程类型" prop="course_type">
+              <Select v-model="course.course_type" :datas="courseType"></Select>
+            </FormItem>
+          </Cell>
+          <Cell :width="3">
+            <FormItem label="是否网络课" prop="is_network">
+              <h-switch v-model="course.is_network" :trueValue="1" :falseValue="0"></h-switch>
+            </FormItem>
+          </Cell>
+          <Cell :width="3">
+            <FormItem label="是否毕业课" prop="is_graduate">
+              <h-switch v-model="course.is_graduate" :trueValue="1" :falseValue="0"></h-switch>
             </FormItem>
           </Cell>
         </Row>
@@ -99,7 +132,10 @@ export default {
           'is_show',
           'is_rec',
           'comment_status',
-          'original_desc'
+          'original_desc',
+          'course_code',
+          'course_hour',
+          'course_type'
         ]
       },
       courseCategories: [],
@@ -115,6 +151,20 @@ export default {
         {
           title: '订阅后可评论',
           key: 2
+        }
+      ],
+      courseType: [
+        {
+          title: '必考',
+          key: 1
+        },
+        {
+          title: '选考',
+          key: 2
+        },
+        {
+          title: '加考',
+          key: 3
         }
       ]
     };

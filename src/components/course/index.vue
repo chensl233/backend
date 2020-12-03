@@ -12,12 +12,17 @@
                 <input type="text" v-model="cond.id" placeholder="课程ID" />
               </FormItem>
             </Cell>
-            <Cell :width="6">
+            <Cell :width="4">
+              <FormItem label="课程ID">
+                <input type="text" v-model="cond.course_code" placeholder="课程代码" />
+              </FormItem>
+            </Cell>
+            <Cell :width="4">
               <FormItem label="搜索">
                 <input type="text" v-model="cond.keywords" placeholder="课程标题" />
               </FormItem>
             </Cell>
-            <Cell :width="8">
+            <Cell :width="6">
               <FormItem label="分类">
                 <template v-slot:label>分类</template>
                 <Select v-model="cond.cid" :filterable="true" :datas="categories" keyName="id" titleName="name"></Select>
@@ -38,8 +43,32 @@
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
         <TableItem prop="id" title="CID" :sort="true" :width="80"></TableItem>
         <TableItem prop="title" title="课程"></TableItem>
-        <TableItem prop="charge" title="价格" unit="元" :sort="true" :width="120"></TableItem>
-        <TableItem title="订阅" :sort="true" :width="120">
+        <TableItem prop="course_code" title="课程代码"></TableItem>
+        <TableItem prop="course_hour" title="课程学时"></TableItem>
+        <TableItem prop="stu_credit" title="课程学分"></TableItem>
+        <TableItem title="课程类型">
+            <template slot-scope="{ data }">
+              {{data.course_type|intToType}}
+            </template>
+        </TableItem>
+        <TableItem title="网络课">
+            <template slot-scope="{ data }">
+              {{data.is_network|intToStr}}
+            </template>
+        </TableItem>
+        <TableItem title="毕业课">
+            <template slot-scope="{ data }">
+              {{data.is_graduate|intToStr}}
+            </template>
+        </TableItem>
+        <TableItem title="授课方式">
+            <template slot-scope="{ data }">
+              {{data.teach_method|intToTeach}}
+            </template>
+        </TableItem>
+        
+        <TableItem prop="charge" title="价格" unit="元" :width="120"></TableItem>
+        <TableItem title="订阅" :width="120">
           <template slot-scope="{ data }">
             <span @click="showSubscribesPage(data)">{{ data.user_count }}</span>
           </template>
@@ -49,7 +78,7 @@
             <p-del-button permission="course.destroy" @click="remove(datas, data)"></p-del-button>
             <p-button glass="h-btn h-btn-s h-btn-primary" permission="course.edit" text="编辑" @click="edit(data)"></p-button>
             <p-button glass="h-btn h-btn-s" permission="course_chapter" text="章节" @click="goChapter(data)"></p-button>
-            <p-button glass="h-btn h-btn-s" permission="course_attach" text="附件" @click="goCourseAttach(data)"></p-button>
+            <p-button glass="h-btn h-btn-s" permission="course_attach" text="课件" @click="goCourseAttach(data)"></p-button>
             <p-button glass="h-btn h-btn-s" permission="course.watchRecords" text="观看记录" @click="showWatchRecords(data)"></p-button>
           </template>
         </TableItem>
@@ -82,6 +111,41 @@ export default {
   },
   mounted() {
     this.getData(true);
+  },
+  filters:{
+      intToStr : (value)=>{
+        switch(value){
+          case 1:
+            return '是';
+            break;
+          default:
+            return '否';
+            break;
+        }
+      },
+      intToTeach: (value)=>{
+        switch(value){
+          case 1:
+            return '网络';
+            break;
+          default:
+            return '面授';
+            break;
+        }
+      },
+      intToType: (value)=>{
+        switch(value){
+          case 1:
+            return '必考';
+            break;
+          case 2:
+            return '选考';
+            break;
+          case 3:
+            return '加考';
+            break;
+        }
+      }
   },
   methods: {
     changePage() {
