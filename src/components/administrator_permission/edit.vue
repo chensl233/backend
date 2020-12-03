@@ -4,9 +4,6 @@
     <div class="table-basic-vue frame-page h-panel">
       <div class="h-panel-bar"><span class="h-panel-title">编辑权限</span></div>
       <div class="h-panel-body">
-        <p>
-          <Button class="h-btn h-btn-primary" icon="icon-arrow-left" @click="back()">返回列表</Button>
-        </p>
 
         <Form v-width="400" mode="block" ref="form" :validOnChange="true" :showErrorTip="true" :labelWidth="110" :rules="rules" :model="permission">
           <FormItem label="角色名" prop="display_name">
@@ -73,9 +70,6 @@ export default {
         this.permission = resp.data;
         this.permission.method = this.permission.method.split('|');
       });
-    },
-    back() {
-      this.$router.push({ name: 'AdministratorPermission' });
     },
     create() {
       let validResult = this.$refs.form.valid();

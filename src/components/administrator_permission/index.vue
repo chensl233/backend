@@ -63,7 +63,24 @@ export default {
       });
     },
     create() {
-      this.$router.push({ name: 'AdministratorPermissionCreate' });
+      this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./create'], resolve);
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            R.Administrator.Store(data).then(resp => {
+              modal.close();
+              HeyUI.$Message.success('成功');
+              this.getData(true);
+            });
+          }
+        }
+      });
     },
     remove(data, item) {
       R.AdministratorPermission.Delete({ id: item.id }).then(resp => {
@@ -72,7 +89,27 @@ export default {
       });
     },
     edit(item) {
-      this.$router.push({ name: 'AdministratorPermissionEdit', params: { id: item.id } });
+            this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./edit'], resolve);
+          },
+          datas: {
+            id: item.id
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            R.Administrator.Update(data).then(resp => {
+              modal.close();
+              HeyUI.$Message.success('成功');
+              this.getData();
+            });
+          }
+        }
+      });
     }
   }
 };

@@ -33,7 +33,7 @@ module.exports = {
             proxy: {
                 // 此处应该配置为开发服务器的后台地址
                 '/backend': {
-                    target: 'http://127.0.0.1:8000'
+                    target: 'http://work3.com'
                 }
             },
             historyApiFallback: true

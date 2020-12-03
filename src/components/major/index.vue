@@ -14,7 +14,7 @@
 <template>
   <div class="table-basic-vue frame-page h-panel">
     <div class="h-panel-bar">
-      <span class="h-panel-title">全部用户</span>
+      <span class="h-panel-title">全部专业</span>
     </div>
     <div class="h-panel-body">
       <div class="float-box mb-10">
@@ -22,19 +22,10 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="用户昵称/手机号" />
+                <input type="text" v-model="cond.keywords" placeholder="院校名称/院校代码" />
               </FormItem>
             </Cell>
-            <Cell :width="6">
-              <FormItem label="会员">
-                <Select v-model="cond.role_id" :filterable="true" :datas="roles" keyName="id" titleName="name"></Select>
-              </FormItem>
-            </Cell>
-            <Cell :width="6">
-              <FormItem label="标签">
-                <Select v-model="cond.tag_id" :filterable="true" :datas="tags" keyName="id" titleName="name"></Select>
-              </FormItem>
-            </Cell>
+
             <Cell :width="6">
               <FormItem>
                 <Button color="primary" @click="getData(true)">搜索</Button>
@@ -45,38 +36,31 @@
         </Form>
       </div>
       <div class="float-box mb-10">
-        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="添加" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="school.store" text="添加" @click="create()"></p-button>
       </div>
       <div class="float-box mb-10">
         <Table :loading="loading" :datas="datas" @sort="sortEvt">
-          <TableItem title="用户" :width="240">
+          <TableItem title="专业名称" :width="240">
             <template slot-scope="{ data }">
-              <copytext :copytext="data.id" />
-              <span class="grey">/</span>
-              <copytext :copytext="data.nick_name" />
-              <span class="grey">/</span>
-              <copytext :copytext="data.mobile" />
+              <copytext :copytext="data.major_name" />
             </template>
           </TableItem>
-          <TableItem prop="created_at" title="注册时间" :sort="true" :width="120"></TableItem>
-          <TableItem title="VIP" :width="100">
+          <TableItem title="教育层次" :width="240">
             <template slot-scope="{ data }">
-              <template v-if="data.role">{{ data.role.name }}</template>
+              <copytext  :copytext="data.major_level|level" />
             </template>
           </TableItem>
-          <TableItem title="备注" :width="200">
+          <TableItem title="专业代码" :width="240">
             <template slot-scope="{ data }">
-              <template v-if="typeof userRemarks[data.id] !== 'undefined'">
-                <div v-html="userRemarks[data.id].remark"></div>
-              </template>
+              <copytext :copytext="data.major_code" />
             </template>
           </TableItem>
+          <TableItem prop="created_at" title="创建时间" :sort="true" :width="120"></TableItem>
+
           <TableItem title="操作" align="center" :width="240">
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.edit" text="编辑" @click="edit(data)"></p-button>
               <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
-              <p-button glass="h-btn h-btn-s" permission="member.detail" text="详情" @click="detail(data)"></p-button>
-              <p-button glass="h-btn h-btn-s" permission="member.remark" text="备注" @click="showRemark(data)"></p-button>
             </template>
           </TableItem>
         </Table>
@@ -105,13 +89,25 @@ export default {
       },
       datas: [],
       loading: false,
-      roles: [],
-      tags: [],
-      userRemarks: []
     };
   },
   mounted() {
     this.getData(true);
+  },
+  filters:{
+      level : (value)=>{
+        switch(value){
+          case 1:
+            return '专科';
+            break;
+          case 2:
+            return '本科';
+            break;
+          case 3:
+            return '研究生';
+            break;
+        }
+      }
   },
   methods: {
     changePage() {
@@ -135,13 +131,42 @@ export default {
       this.loading = true;
       let data = this.pagination;
       Object.assign(data, this.cond);
-      R.Member.List(data).then(resp => {
-        this.datas = resp.data.data.data;
-        this.pagination.total = resp.data.data.total;
+      R.Major.List(data).then(resp => {
+        this.datas = resp.data.data;
+        this.pagination.total = resp.data.total;
         this.loading = false;
         this.roles = resp.data.roles;
         this.tags = resp.data.tags;
         this.userRemarks = resp.data.user_remarks;
+      });
+    },
+    remove(item) {
+      R.Major.Delete({ id: item.major_id }).then(resp => {
+        HeyUI.$Message.success('成功');
+        this.getData(true);
+      });
+    },
+    edit(item) {
+      this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./edit'], resolve);
+          },
+          datas: {
+            major_id: item.major_id
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            R.Major.Update(data).then(resp => {
+              modal.close();
+              HeyUI.$Message.success('成功');
+              this.getData();
+            });
+          }
+        }
       });
     },
     create() {
@@ -155,7 +180,7 @@ export default {
         },
         events: {
           success: (modal, data) => {
-            R.Member.Store(data).then(resp => {
+            R.Major.Store(data).then(resp => {
               modal.close();
               HeyUI.$Message.success('成功');
               this.getData(true);
@@ -164,75 +189,6 @@ export default {
         }
       });
     },
-    edit(item) {
-      this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./edit'], resolve);
-          },
-          datas: {
-            id: item.id
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            R.Member.Update(data).then(resp => {
-              modal.close();
-              HeyUI.$Message.success('成功');
-              this.getData();
-            });
-          }
-        }
-      });
-    },
-    detail(item) {
-      this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./detail'], resolve);
-          },
-          datas: {
-            id: item.id
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    },
-    remove(item) {
-      R.Member.Delete({ id: item.id }).then(resp => {
-        HeyUI.$Message.success('成功');
-        this.getData(true);
-      });
-    },
-    showRemark(item) {
-      this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./remark'], resolve);
-          },
-          datas: {
-            id: item.id
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    }
   }
 };
 </script>

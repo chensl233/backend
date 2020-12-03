@@ -250,6 +250,9 @@ const Request = {
     Update(param) {
       return Ajax.putJson('/member/' + param.id, param);
     },
+    Delete(param) {
+      return Ajax.delete('/member/' + param.id);
+    },
     InviteBalanceWithdrawOrders(param) {
       return Ajax.get('/member/inviteBalance/withdrawOrders', param);
     },
@@ -295,6 +298,40 @@ const Request = {
     RemarkUpdate(param) {
       return Ajax.putJson('/member/' + param.id + '/remark', param);
     },
+  },
+  School: {
+    List(param) {
+      return Ajax.get('/school', param);
+    },
+    Store(param) {
+      return Ajax.postJson('/school/store',param);
+    },
+    Edit(param) {
+      return Ajax.get('/school/' + param.id, param);
+    },
+    Update(param) {
+      return Ajax.putJson('/school/' + param.school_id, param);
+    },
+    Delete(param) {
+      return Ajax.delete('/school/' + param.id);
+    }
+  },
+  Major: {
+    List(param) {
+      return Ajax.get('/major', param);
+    },
+    Store(param) {
+      return Ajax.postJson('/major/store',param);
+    },
+    Edit(param) {
+      return Ajax.get('/major/' + param.id, param);
+    },
+    Update(param) {
+      return Ajax.putJson('/major/' + param.major_id, param);
+    },
+    Delete(param) {
+      return Ajax.delete('/major/' + param.id);
+    }
   },
   Course: {
     List(param) {

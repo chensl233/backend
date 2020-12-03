@@ -102,7 +102,7 @@ const fullMenus = [{
   {
     title: '插件',
     key: 'Addons'
-  }
+  },
     // {
     //     title: '角色',
     //     key: 'AdministratorRole'

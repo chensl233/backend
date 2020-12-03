@@ -5,6 +5,7 @@ import Utils from './utils';
 const DefaultParam = { repeatable: false };
 
 let ajax = {
+  // PREFIX: 'http://work3.com/backend/api/v1',
   PREFIX: '/backend/api/v1',
   Author: 'meedu',
   requestingApi: new Set(),

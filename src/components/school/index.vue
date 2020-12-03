@@ -14,7 +14,7 @@
 <template>
   <div class="table-basic-vue frame-page h-panel">
     <div class="h-panel-bar">
-      <span class="h-panel-title">全部用户</span>
+      <span class="h-panel-title">全部院校</span>
     </div>
     <div class="h-panel-body">
       <div class="float-box mb-10">
@@ -22,19 +22,10 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="用户昵称/手机号" />
+                <input type="text" v-model="cond.school_code" placeholder="院校名称/院校代码" />
               </FormItem>
             </Cell>
-            <Cell :width="6">
-              <FormItem label="会员">
-                <Select v-model="cond.role_id" :filterable="true" :datas="roles" keyName="id" titleName="name"></Select>
-              </FormItem>
-            </Cell>
-            <Cell :width="6">
-              <FormItem label="标签">
-                <Select v-model="cond.tag_id" :filterable="true" :datas="tags" keyName="id" titleName="name"></Select>
-              </FormItem>
-            </Cell>
+
             <Cell :width="6">
               <FormItem>
                 <Button color="primary" @click="getData(true)">搜索</Button>
@@ -45,38 +36,37 @@
         </Form>
       </div>
       <div class="float-box mb-10">
-        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="添加" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="school.store" text="添加" @click="create()"></p-button>
       </div>
       <div class="float-box mb-10">
         <Table :loading="loading" :datas="datas" @sort="sortEvt">
-          <TableItem title="用户" :width="240">
+          <TableItem title="院校名称" :width="240">
             <template slot-scope="{ data }">
-              <copytext :copytext="data.id" />
-              <span class="grey">/</span>
-              <copytext :copytext="data.nick_name" />
-              <span class="grey">/</span>
-              <copytext :copytext="data.mobile" />
+              <copytext :copytext="data.school_name" />
             </template>
           </TableItem>
-          <TableItem prop="created_at" title="注册时间" :sort="true" :width="120"></TableItem>
-          <TableItem title="VIP" :width="100">
+          <TableItem title="院校代码" :width="150">
             <template slot-scope="{ data }">
-              <template v-if="data.role">{{ data.role.name }}</template>
+              <copytext :copytext="data.school_code" />
             </template>
           </TableItem>
-          <TableItem title="备注" :width="200">
+          <TableItem title="负责人" :width="150">
             <template slot-scope="{ data }">
-              <template v-if="typeof userRemarks[data.id] !== 'undefined'">
-                <div v-html="userRemarks[data.id].remark"></div>
-              </template>
+              <copytext :copytext="data.school_master" />
             </template>
           </TableItem>
+          <TableItem title="负责人联系方式" :width="240">
+            <template slot-scope="{ data }">
+              <copytext :copytext="data.school_master_tel" />
+            </template>
+          </TableItem>
+          <TableItem prop="created_at" title="创建时间" :width="150"></TableItem>
+
           <TableItem title="操作" align="center" :width="240">
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.edit" text="编辑" @click="edit(data)"></p-button>
               <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
-              <p-button glass="h-btn h-btn-s" permission="member.detail" text="详情" @click="detail(data)"></p-button>
-              <p-button glass="h-btn h-btn-s" permission="member.remark" text="备注" @click="showRemark(data)"></p-button>
+
             </template>
           </TableItem>
         </Table>
@@ -97,17 +87,12 @@ export default {
         total: 0
       },
       cond: {
-        keywords: '',
-        role_id: null,
-        sort: 'created_at',
-        order: 'desc',
-        tag_id: null
+        // school_name:'',
+        school_code:'',
+        sort:'',
       },
       datas: [],
       loading: false,
-      roles: [],
-      tags: [],
-      userRemarks: []
     };
   },
   mounted() {
@@ -118,14 +103,17 @@ export default {
       this.getData();
     },
     reset() {
-      this.cond.keywords = '';
-      this.cond.role_id = null;
-      this.cond.tag_id = null;
+      this.cond.school_code = null;
       this.getData(true);
+    },
+    remove(item) {
+      R.School.Delete({ id: item.school_id }).then(resp => {
+        HeyUI.$Message.success('成功');
+        this.getData(true);
+      });
     },
     sortEvt(sort) {
       this.cond.sort = sort.prop;
-      this.cond.order = sort.type;
       this.getData();
     },
     getData(reload = false) {
@@ -135,9 +123,9 @@ export default {
       this.loading = true;
       let data = this.pagination;
       Object.assign(data, this.cond);
-      R.Member.List(data).then(resp => {
-        this.datas = resp.data.data.data;
-        this.pagination.total = resp.data.data.total;
+      R.School.List(data).then(resp => {
+        this.datas = resp.data.data;
+        this.pagination.total = resp.data.total;
         this.loading = false;
         this.roles = resp.data.roles;
         this.tags = resp.data.tags;
@@ -155,7 +143,7 @@ export default {
         },
         events: {
           success: (modal, data) => {
-            R.Member.Store(data).then(resp => {
+            R.School.Store(data).then(resp => {
               modal.close();
               HeyUI.$Message.success('成功');
               this.getData(true);
@@ -173,12 +161,12 @@ export default {
             require(['./edit'], resolve);
           },
           datas: {
-            id: item.id
+            school_id: item.school_id
           }
         },
         events: {
           success: (modal, data) => {
-            R.Member.Update(data).then(resp => {
+            R.School.Update(data).then(resp => {
               modal.close();
               HeyUI.$Message.success('成功');
               this.getData();
@@ -187,52 +175,7 @@ export default {
         }
       });
     },
-    detail(item) {
-      this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./detail'], resolve);
-          },
-          datas: {
-            id: item.id
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    },
-    remove(item) {
-      R.Member.Delete({ id: item.id }).then(resp => {
-        HeyUI.$Message.success('成功');
-        this.getData(true);
-      });
-    },
-    showRemark(item) {
-      this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./remark'], resolve);
-          },
-          datas: {
-            id: item.id
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    }
+  
   }
 };
 </script>

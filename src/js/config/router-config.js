@@ -114,6 +114,12 @@ const initRouter = () => {
         meta: { title: '修改密码' }
       },
       {
+        path: '/administrator_permission',
+        name: 'AdministratorPermission',
+        component: (resolve) => require(['components/administrator_permission/index'], resolve),
+        meta: { title: '权限' }
+      },
+      {
         path: '/administrator',
         name: 'Administrator',
         component: (resolve) => require(['components/administrator/index'], resolve),
@@ -276,12 +282,21 @@ const initRouter = () => {
         name: 'PermissionError',
         component: (resolve) => require(['components/error-pages/403'], resolve),
         meta: { title: '权限错误' }
-      },
-      {
+      }, {
         path: '*',
         name: 'CommonNotfoundError',
         component: (resolve) => require(['components/error-pages/404'], resolve),
         meta: { title: '页面找不到' }
+      }, {
+        path: '/School',
+        name: 'School',
+        component: (resolve) => require(['components/school/index'], resolve),
+        meta: { title: '合作院校' }
+      }, {
+        path: '/Major',
+        name: 'Major',
+        component: (resolve) => require(['components/major/index'], resolve),
+        meta: { title: '专业列表' }
       }
       ]
     }]
@@ -291,6 +306,11 @@ const initRouter = () => {
   let isFirstRouter = true;
 
   router.beforeEach((to, from, next) => {
+    if ( 0 === to.matched.length || to.name === 'root') {
+      //404跳转
+      next({ name: 'CommonNotfoundError' });
+      return;
+    }
     if (to.name !== 'Login' && !Utils.getLocal('token')) {
       next({ name: 'Login' });
       return;
