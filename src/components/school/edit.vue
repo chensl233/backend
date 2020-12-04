@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     init() {
-      R.School.Edit({ id: this.school_id }).then(res => {
+      R.School.Edit({ school_id: this.school_id }).then(res => {
         this.school = res.data;
       });
     },

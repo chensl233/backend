@@ -69,9 +69,7 @@ export default {
     };
   },
   mounted() {
-    // R.School.Create().then(res => {
-    //   this.roles = res.data.roles;
-    // });
+
   },
   methods: {
     create() {

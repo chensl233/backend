@@ -154,16 +154,12 @@ export default {
       ],
       courseType: [
         {
-          title: '必考',
+          title: '必修',
           key: 1
         },
         {
-          title: '选考',
+          title: '选修',
           key: 2
-        },
-        {
-          title: '加考',
-          key: 3
         }
       ]
     };

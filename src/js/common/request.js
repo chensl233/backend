@@ -307,13 +307,19 @@ const Request = {
       return Ajax.postJson('/school/store',param);
     },
     Edit(param) {
-      return Ajax.get('/school/' + param.id, param);
+      return Ajax.get('/school/' + param.school_id, param);
     },
     Update(param) {
       return Ajax.putJson('/school/' + param.school_id, param);
     },
     Delete(param) {
-      return Ajax.delete('/school/' + param.id);
+      return Ajax.delete('/school/' + param.school_id);
+    },
+    Detail(param) {
+      return Ajax.get('/school/' + param.school_id + '/detail', param);
+    },
+    SchoolMajor(param) {
+      return Ajax.get('/school/'  + param.school_id + '/detail/schoolMajor', param);
     }
   },
   Major: {

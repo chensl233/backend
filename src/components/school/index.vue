@@ -55,17 +55,19 @@
               <copytext :copytext="data.school_master" />
             </template>
           </TableItem>
-          <TableItem title="负责人联系方式" :width="240">
+          <TableItem title="负责人联系方式" :width="200">
             <template slot-scope="{ data }">
               <copytext :copytext="data.school_master_tel" />
             </template>
           </TableItem>
+          <TableItem prop="major_count" title="专业数量" :width="100"></TableItem>
           <TableItem prop="created_at" title="创建时间" :width="150"></TableItem>
 
           <TableItem title="操作" align="center" :width="240">
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.edit" text="编辑" @click="edit(data)"></p-button>
               <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
+              <p-button glass="h-btn h-btn-s" permission="member.detail" text="专业详情" @click="schoolMajor(data)"></p-button>
 
             </template>
           </TableItem>
@@ -107,7 +109,7 @@ export default {
       this.getData(true);
     },
     remove(item) {
-      R.School.Delete({ id: item.school_id }).then(resp => {
+      R.School.Delete({ school_id: item.school_id }).then(resp => {
         HeyUI.$Message.success('成功');
         this.getData(true);
       });
@@ -175,6 +177,26 @@ export default {
         }
       });
     },
+    schoolMajor(item){
+      this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./schoolMajor'], resolve);
+          },
+          datas: {
+            school_id: item.school_id
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            modal.close();
+            this.getData();
+          }
+        }
+      });
+    }
   
   }
 };

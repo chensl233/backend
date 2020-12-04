@@ -136,13 +136,10 @@ export default {
       intToType: (value)=>{
         switch(value){
           case 1:
-            return '必考';
+            return '必修';
             break;
           case 2:
-            return '选考';
-            break;
-          case 3:
-            return '加考';
+            return '选修';
             break;
         }
       }
