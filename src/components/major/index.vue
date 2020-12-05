@@ -22,7 +22,7 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="院校名称/院校代码" />
+                <input type="text" v-model="cond.keywords" placeholder="专业名称/专业代码" />
               </FormItem>
             </Cell>
 

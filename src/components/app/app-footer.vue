@@ -11,7 +11,7 @@
 
 <template>
   <div class="app-footer">
-    PowerBy <a href="#">MeEdu</a>
+    PowerBy <a href="#">Qswork</a>
   </div>
 </template>
 <script>

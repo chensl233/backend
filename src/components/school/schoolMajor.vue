@@ -14,12 +14,15 @@
     <div class="h-panel-body">
       <Row class="base-info mb-10" v-if="school">
         <Cell width="6">
-          院校ID：
-          <copytext :copytext="school.school_id" />
+          院校代码：
+          <copytext :copytext="school.school_code" />
         </Cell>
         <Cell width="6">
           院校名称：
           <copytext :copytext="school.school_name" />
+        </Cell>
+        <Cell width="24" class="mt-10 mb-10">
+          <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.credit1.change" text="添加专业" @click="schoolMajorAdd()"></p-button>
         </Cell>
       </Row>
 
@@ -56,6 +59,11 @@
                 </template>
             </TableItem>
             <TableItem prop="created_at" title="记录时间"></TableItem>
+            <TableItem title="操作" align="center" :width="240">
+              <template slot-scope="{ data }">
+                <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="schoolMajorDel(data)"></p-del-button>
+              </template>
+            </TableItem>
           </Table>
           <Pagination align="right" v-model="paginate.majors" @change="paginateChange('majors')" />
         </Cell>
@@ -70,7 +78,7 @@ export default {
   props: ['school_id'],
   data() {
     return {
-      school: null,
+      school: {},
       tabs: {
         majors: '专业列表',
         collect: '收藏'
@@ -123,16 +131,7 @@ export default {
       });
     },
     getschoolCollect(reset = false) {
-      if (reset === true) {
-        this.paginate.collect.page = 1;
-      }
-      let data = this.paginate.collect;
-      data.id = this.id;
-      R.Member.Collect(data).then(res => {
-        this.schoolCollect = res.data.data.data;
-        this.paginate.collect.total = res.data.data.total;
-        this.schoolCollectMap = res.data.majors;
-      });
+
     },
     paginateChange(t) {
       if (t === 'majors') {
@@ -140,6 +139,38 @@ export default {
       } else if (t === 'collect') {
         this.getschoolCollect();
       }
+    },
+    schoolMajorAdd() {
+      this.$Modal({
+        hasCloseIcon: true,
+        closeOnMask: false,
+        component: {
+          vue: resolve => {
+            require(['./schoolMajorAdd'], resolve);
+          },
+          datas: {
+            school_id: this.school_id
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            modal.close();
+            R.School.SchoolMajorDel(data).then(() => {
+              HeyUI.$Message.success('成功');
+              this.getschoolMajor();
+            });
+          }
+        }
+      });
+    },
+    schoolMajorDel(item) {
+      let data = {};
+      data.school_id = this.school_id;
+      data.major_id = item.major_id;
+      R.School.SchoolMajorDel(data).then(res => {
+          HeyUI.$Message.success('删除成功');
+          this.getschoolMajor();
+      });
     }
   },filters:{
       level : (value)=>{

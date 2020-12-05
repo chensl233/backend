@@ -319,7 +319,13 @@ const Request = {
       return Ajax.get('/school/' + param.school_id + '/detail', param);
     },
     SchoolMajor(param) {
-      return Ajax.get('/school/'  + param.school_id + '/detail/schoolMajor', param);
+      return Ajax.get('/school/'  + param.school_id + '/schoolMajor', param);
+    },
+    SchoolMajorAdd(param) {
+      return Ajax.postJson('/school/'  + param.school_id + '/schoolMajor', param);
+    },
+    SchoolMajorDel(param) {
+      return Ajax.delete('/school/' + param.school_id+'/schoolMajor',{data:param});
     }
   },
   Major: {
