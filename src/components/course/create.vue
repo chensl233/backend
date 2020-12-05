@@ -35,50 +35,29 @@
         </Row>
 
         <Row :space="10">
-          <Cell :width="12">
+          <Cell :width="10">
             <FormItem label="课程名" prop="title">
               <input type="text" v-model="course.title" />
             </FormItem>
           </Cell>
           <Cell :width="6">
-            <FormItem label="学分" prop="title">
-              <input type="text" v-model="course.stu_credit" />
+            <FormItem label="课程代码" prop="course_code">
+              <input type="text" v-model="course.course_code" />
             </FormItem>
           </Cell>
-          <Cell :width="6">
+          <Cell :width="4">
+            <FormItem label="课程类型" prop="course_type">
+              <Select v-model="course.course_type" :datas="courseType"></Select>
+            </FormItem>
+          </Cell>
+          <Cell :width="4">
             <FormItem label="评论开关" prop="comment_status">
               <Select v-model="course.comment_status" :datas="commentStatus"></Select>
             </FormItem>
           </Cell>
         </Row>
 
-        <Row :space="10">
-          <Cell :width="6">
-            <FormItem label="课程代码" prop="course_code">
-              <input type="text" v-model="course.course_code" />
-            </FormItem>
-          </Cell>
-          <Cell :width="6">
-            <FormItem label="课程学时" prop="course_hour">
-              <input type="text" v-model="course.course_hour" />
-            </FormItem>
-          </Cell>
-          <Cell :width="6">
-            <FormItem label="课程类型" prop="course_type">
-              <Select v-model="course.course_type" :datas="courseType"></Select>
-            </FormItem>
-          </Cell>
-          <Cell :width="3">
-            <FormItem label="是否网络课" prop="is_network">
-              <h-switch v-model="course.is_network" :trueValue="1" :falseValue="0"></h-switch>
-            </FormItem>
-          </Cell>
-          <Cell :width="3">
-            <FormItem label="是否毕业课" prop="is_graduate">
-              <h-switch v-model="course.is_graduate" :trueValue="1" :falseValue="0"></h-switch>
-            </FormItem>
-          </Cell>
-        </Row>
+
 
         <FormItem label="Slug" prop="slug">
           <input type="text" v-model="course.slug" placeholder="不清楚可不填写" />
@@ -133,7 +112,6 @@ export default {
           'comment_status',
           'original_desc',
           'course_code',
-          'course_hour',
           'course_type'
         ]
       },

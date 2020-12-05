@@ -13,7 +13,7 @@
               </FormItem>
             </Cell>
             <Cell :width="4">
-              <FormItem label="课程ID">
+              <FormItem label="课程代码">
                 <input type="text" v-model="cond.course_code" placeholder="课程代码" />
               </FormItem>
             </Cell>
@@ -42,23 +42,11 @@
       </div>
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
         <TableItem prop="id" title="CID" :sort="true" :width="80"></TableItem>
-        <TableItem prop="title" title="课程"></TableItem>
+        <TableItem prop="title" :width="150" title="课程"></TableItem>
         <TableItem prop="course_code" title="课程代码"></TableItem>
-        <TableItem prop="course_hour" title="课程学时"></TableItem>
-        <TableItem prop="stu_credit" title="课程学分"></TableItem>
         <TableItem title="课程类型">
             <template slot-scope="{ data }">
               {{data.course_type|intToType}}
-            </template>
-        </TableItem>
-        <TableItem title="网络课">
-            <template slot-scope="{ data }">
-              {{data.is_network|intToStr}}
-            </template>
-        </TableItem>
-        <TableItem title="毕业课">
-            <template slot-scope="{ data }">
-              {{data.is_graduate|intToStr}}
             </template>
         </TableItem>
         <TableItem title="授课方式">

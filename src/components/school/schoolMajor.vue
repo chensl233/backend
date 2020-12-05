@@ -155,7 +155,7 @@ export default {
         events: {
           success: (modal, data) => {
             modal.close();
-            R.School.SchoolMajorDel(data).then(() => {
+            R.School.SchoolMajorAdd(data).then(() => {
               HeyUI.$Message.success('成功');
               this.getschoolMajor();
             });
