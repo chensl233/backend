@@ -391,6 +391,14 @@ const Request = {
       return Ajax.delete('/course_attach/' + param.id, param);
     }
   },
+  CourseMoudle: {
+    List(param) {
+      return Ajax.get('/course_moudle',param);
+    },
+    Delete(param) {
+      return Ajax.delete('/course_moudle/' + param.mould_id);
+    }
+  },
   Video: {
     List(param) {
       return Ajax.get('/video', param);

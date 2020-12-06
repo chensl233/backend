@@ -26,7 +26,7 @@
 <template>
   <div class="app-logo">
     <router-link to="/">
-      <span class="app-logo-text">管理后台</span>
+      <span class="app-logo-text">轻松在线管理后台</span>
     </router-link>
   </div>
 </template>

@@ -52,7 +52,7 @@ export default {
         "siderTheme": "white",
         "showSystab": true,
         "headerFixed": true,
-        // "siderFixed": true
+        "siderFixed": true
       }
     };
   },

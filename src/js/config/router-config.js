@@ -283,11 +283,6 @@ const initRouter = () => {
         component: (resolve) => require(['components/error-pages/403'], resolve),
         meta: { title: '权限错误' }
       }, {
-        path: '*',
-        name: 'CommonNotfoundError',
-        component: (resolve) => require(['components/error-pages/404'], resolve),
-        meta: { title: '页面找不到' }
-      }, {
         path: '/School',
         name: 'School',
         component: (resolve) => require(['components/school/index'], resolve),
@@ -297,6 +292,16 @@ const initRouter = () => {
         name: 'Major',
         component: (resolve) => require(['components/major/index'], resolve),
         meta: { title: '专业列表' }
+      }, {
+        path: '/CoursesTemplate',
+        name: 'CoursesTemplate',
+        component: (resolve) => require(['components/course_template/index'], resolve),
+        meta: { title: '课程模板' }
+      }, {
+        path: '*',
+        name: 'CommonNotfoundError',
+        component: (resolve) => require(['components/error-pages/404'], resolve),
+        meta: { title: '页面找不到' }
       }
       ]
     }]
