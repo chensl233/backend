@@ -134,7 +134,7 @@
       </div>
       <p class="copyright">
         Copyright © 2020 -
-        <a href="https://meedu.vip">MeEdu</a>
+        <a href="#">Qswork</a>
       </p>
     </div>
   </div>

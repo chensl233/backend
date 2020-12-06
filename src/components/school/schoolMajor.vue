@@ -32,21 +32,6 @@
         </Cell>
       </Row>
 
-      <Row v-show="selectTab === 'collect'">
-        <Cell width="24">
-          <Table :datas="schoolCollect" class="mb-10">
-            <TableItem title="课程">
-              <template slot-scope="{ data }">
-                <span v-if="schoolCollectMap[data.course_id]">{{ schoolCollectMap[data.course_id].title }}</span>
-                <span class="red" v-else>已删除</span>
-              </template>
-            </TableItem>
-            <TableItem prop="created_at" title="时间"></TableItem>
-          </Table>
-          <Pagination align="right" v-model="paginate.collect" @change="paginateChange('collect')" />
-        </Cell>
-      </Row>
-
       <Row v-show="selectTab === 'majors'">
         <Cell width="24">
           <Table :datas="schoolMajor" class="mb-10">
@@ -81,7 +66,6 @@ export default {
       school: {},
       tabs: {
         majors: '专业列表',
-        collect: '收藏'
       },
       selectTab: 'majors',
       paginate: {
@@ -98,8 +82,6 @@ export default {
       },
       schoolMajor: [],
       schoolMajorMap: [],
-      schoolCollect: [],
-      schoolCollectMap: []
     };
   },
   mounted() {
@@ -116,8 +98,6 @@ export default {
       let key = data.key;
       if (key === 'majors') {
         this.getschoolMajor(true);
-      } else if (key === 'collect') {
-        this.getschoolCollect(true);
       }
     },
     getschoolMajor(reset = false) {
@@ -130,14 +110,9 @@ export default {
           this.schoolMajor = res.data.data;
       });
     },
-    getschoolCollect(reset = false) {
-
-    },
     paginateChange(t) {
       if (t === 'majors') {
         this.getschoolMajor();
-      } else if (t === 'collect') {
-        this.getschoolCollect();
       }
     },
     schoolMajorAdd() {

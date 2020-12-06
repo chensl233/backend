@@ -22,7 +22,7 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="专业名称/专业代码" />
+                <input type="text" v-model="cond.major_code" placeholder="专业名称/专业代码" />
               </FormItem>
             </Cell>
 
@@ -81,7 +81,7 @@ export default {
         total: 0
       },
       cond: {
-        keywords: '',
+        major_code: '',
         role_id: null,
         sort: 'created_at',
         order: 'desc',
@@ -114,7 +114,7 @@ export default {
       this.getData();
     },
     reset() {
-      this.cond.keywords = '';
+      this.cond.major_code = '';
       this.cond.role_id = null;
       this.cond.tag_id = null;
       this.getData(true);

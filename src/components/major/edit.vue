@@ -14,12 +14,12 @@
       >
         <Row :space="10">
           <Cell :width="6">
-            <FormItem label="院校名称" prop="major_name">
+            <FormItem label="专业名称" prop="major_name">
               <input type="text" v-model="major.major_name" />
             </FormItem>
           </Cell>
           <Cell :width="6">
-            <FormItem label="院校代码" prop="major_code">
+            <FormItem label="专业代码" prop="major_code">
               <input type="text" v-model="major.major_code" />
             </FormItem>
           </Cell>
