@@ -18,9 +18,9 @@
         <SysTabs v-if="layoutConfig.showSystab" homePage="Home"></SysTabs>
         <Content>
           <div class="app-frame-content">
-            <!-- <keep-alive> -->
+            <keep-alive>
             <router-view></router-view>
-            <!-- </keep-alive> -->
+            </keep-alive>
           </div>
           <HFooter>
             <appFooter></appFooter>
@@ -49,10 +49,10 @@ export default {
       loading: true,
       openSetting: false,
       layoutConfig: {
-        siderTheme: 'white',
-        showSystab: false,
-        headerFixed: true,
-        siderFixed: true
+        "siderTheme": "white",
+        "showSystab": true,
+        "headerFixed": true,
+        // "siderFixed": true
       }
     };
   },
