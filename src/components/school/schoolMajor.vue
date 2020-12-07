@@ -108,6 +108,7 @@ export default {
       data.school_id = this.school_id;
       R.School.SchoolMajor(data).then(res => {
           this.schoolMajor = res.data.data;
+          this.paginate.majors.total = res.data.total;
       });
     },
     paginateChange(t) {

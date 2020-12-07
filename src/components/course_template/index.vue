@@ -138,6 +138,23 @@ export default {
         this.getData();
       });
     },
+    create() {
+      this.$Modal({
+        hasCloseIcon: true,
+        closeOnMask: false,
+        component: {
+          vue: resolve => {
+            require(['./create'], resolve);
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            modal.close();
+            this.getData(true);
+          }
+        }
+      });
+    },
     
   }
 };

@@ -1,0 +1,105 @@
+<style lang="less"></style>
+<template>
+  <div class="h-panel w-800">
+    <div class="h-panel-bar">
+      <span class="h-panel-title">添加专业</span>
+    </div>
+    <div class="h-panel-body">
+      <Form
+        mode="block"
+        ref="form"
+        :validOnChange="true"
+        :showErrorTip="true"
+        :labelWidth="300"
+        :rules="rules"
+        :model="schoolMould"
+      >
+        <Row :space="10">
+           <Cell :width="8">
+            <FormItem label="适用院校" prop="school_id">
+                <Select
+                v-model="schoolMould.school_id"
+                :datas="major_level"
+                keyName="id"
+                titleName="name"
+                @change="getMajor()"
+                ></Select>
+            </FormItem>
+          </Cell>
+          <Cell :width="8">
+            <FormItem label="专业层次" prop="major_level">
+                <Select
+                v-model="schoolMould.major_level"
+                :datas="major_level"
+                keyName="id"
+                titleName="name"
+                @change="getMajor()"
+                ></Select>
+            </FormItem>
+          </Cell>
+          <Cell :width="8">
+              <FormItem label="适用专业" prop="major_id">
+                    <Select
+                    v-model="schoolMould.major_id" 
+                    :datas="major_list" 
+                    :filterable="true" 
+                    keyName='major_id'
+                    titleName='major_name'>
+                    </Select>
+            </FormItem>
+          </Cell>
+        </Row>
+        <Row :space="10">
+            <FormItem label="模板名称" prop="mould_name">
+                <input type="text" v-model="schoolMould.slug" placeholder="例如:xx专业通用模板" />
+            </FormItem>
+        </Row>
+
+        <FormItem>
+          <Button color="primary" @click="create">确认操作</Button>
+        </FormItem>
+      </Form>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  props: ['school_id'],
+  data() {
+    return {
+      schoolMould: {
+        major_level: 1, //专业层次 1专 2本 3研究
+        major_id: null
+      },
+      major_level:[
+        {id:1,name:'专科'},
+        {id:2,name:'本科'},
+        {id:3,name:'研究生'},
+      ],
+      rules: {
+        required: ['major_id','mould_name','school_id']
+      }, 
+      major_list: []
+    };
+  },
+  methods: {
+    create() {
+      let validResult = this.$refs.form.valid();
+      if (validResult.result) {
+        let data = this.schoolMould;
+        data.school_id = this.school_id;
+        delete data.major_level;
+        this.$emit('success', data);
+      }
+    },
+    getMajor() {
+        R.Major.List(this.schoolMould).then(res => {
+            this.param = res.data.data;
+        });
+    }
+  },
+   mounted() {
+    this.getMajor();
+  }
+};
+</script>

@@ -17,7 +17,6 @@
               <Select v-model="course.category_id" :datas="courseCategories" keyName="id" titleName="name"></Select>
             </FormItem>
           </Cell>
-
         </Row>
         <Row :space="10">
           <Cell :width="8">
