@@ -22,19 +22,15 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="学员昵称/手机号" />
+                <input type="text" v-model="cond.keywords" placeholder="学员姓名/学号" />
               </FormItem>
             </Cell>
             <Cell :width="6">
-              <FormItem label="会员">
-                <Select v-model="cond.role_id" :filterable="true" :datas="roles" keyName="id" titleName="name"></Select>
+              <FormItem label="专业">
+                <Select :filterable="true" keyName="id" titleName="name"></Select>
               </FormItem>
             </Cell>
-            <Cell :width="6">
-              <FormItem label="标签">
-                <Select v-model="cond.tag_id" :filterable="true" :datas="tags" keyName="id" titleName="name"></Select>
-              </FormItem>
-            </Cell>
+
             <Cell :width="6">
               <FormItem>
                 <Button color="primary" @click="getData(true)">搜索</Button>
@@ -64,15 +60,20 @@
               <copytext  :copytext="data.major.major_level|level" />
             </template>
           </TableItem>
-          <TableItem prop="major.major_name" title="专业" :width="140">
+          <TableItem title="专业" :width="140">
             <template slot-scope="{ data }">
               <copytext  :copytext="data.major.major_name" />
+            </template>
+          </TableItem>
+          <TableItem title="年级" :width="100"> 
+            <template slot-scope="{ data }">
+              <copytext  :copytext="data.student_income|sub_info" />
             </template>
           </TableItem>
 
           <TableItem prop="student_income" title="入学时间" :width="130"></TableItem>
 
-          <TableItem prop="created_at" title="注册时间" :sort="true" :width="120"></TableItem>
+          <!-- <TableItem prop="created_at" title="注册时间" :sort="true" :width="120"></TableItem> -->
 
           <TableItem title="操作" align="center" :width="240">
             <template slot-scope="{ data }">
@@ -110,7 +111,8 @@ export default {
       loading: false,
       roles: [],
       tags: [],
-      userRemarks: []
+      userRemarks: [],
+      temp:'2020级',
     };
   },
   mounted() {
@@ -178,11 +180,8 @@ export default {
         },
         events: {
           success: (modal, data) => {
-            R.Member.Import(data).then(resp => {
               modal.close();
-              HeyUI.$Message.success('成功');
               this.getData(true);
-            });
           }
         }
       });
@@ -270,7 +269,12 @@ export default {
             return '研究生';
             break;
         }
+      },
+      sub_info : (value)=>{
+        if(!value) return '-';
+        return value.substr(0, 4) + '级';
       }
+      
   }
 };
 </script>

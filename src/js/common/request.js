@@ -348,6 +348,11 @@ const Request = {
       return Ajax.delete('/major/' + param.id);
     }
   },
+  Grade: {
+    List(param) {
+      return Ajax.get('/grade',param);
+    }
+  },
   Course: {
     List(param) {
       return Ajax.get('/course', param);
