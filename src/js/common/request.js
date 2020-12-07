@@ -405,7 +405,13 @@ const Request = {
     },
     Delete(param) {
       return Ajax.delete('/course_moudle/' + param.mould_id);
-    }
+    },
+    Store(param) {
+      return Ajax.postJson('/course_moudle',param);
+    },
+    Edit(param) {
+      return Ajax.get('/course_moudle/'+param.mould_id);
+    },
   },
   Video: {
     List(param) {

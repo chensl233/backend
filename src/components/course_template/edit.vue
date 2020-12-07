@@ -76,7 +76,7 @@
 </template>
 <script>
 export default {
-  props: ['school_id'],
+  props: ['mould_id'],
   data() {
     return {
       schoolMould: {
@@ -112,6 +112,7 @@ export default {
       if (validResult.result) {
         let data = this.schoolMould;
         R.CourseMoudle.Store(data).then(res=>{
+          return false;
           this.$emit('success', res);
         })
       }
@@ -130,10 +131,18 @@ export default {
           this.school_list = res.data.data;
           this.school_list.unshift({school_id:0,school_name:'通用'});
         });
+    },
+    init() {
+        console.log(this.mould_id);
+        R.CourseMoudle.Edit({mould_id:this.mould_id}).then(res => {
+            this.schoolMould = res.data;
+            console.log(this.schoolMould);
+        });
     }
   },
    mounted() {
     this.getSchool();
+    this.init();
   }
 };
 </script>

@@ -155,6 +155,27 @@ export default {
         }
       });
     },
+    edit(item) {
+      this.$Modal({
+        hasCloseIcon: true,
+        closeOnMask: false,
+        component: {
+          vue: resolve => {
+            require(['./edit'], resolve);
+          },
+          datas: {
+            mould_id: item.mould_id
+          }
+        },
+        
+        events: {
+          success: (modal, data) => {
+            modal.close();
+            this.getData(true);
+          }
+        }
+      });
+    },
     
   }
 };
