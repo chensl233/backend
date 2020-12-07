@@ -127,7 +127,7 @@ export default {
     mouldCourseDel(item) {
       let data = {};
       data.mould_id = this.mould_info.mould_id;
-      data.course_id = this.course_id;
+      data.course_id = item.course_id;
       R.CourseMould.MouldCourseDelete(data).then(res => {
           HeyUI.$Message.success('删除成功');
           this.getMouldCourse();
