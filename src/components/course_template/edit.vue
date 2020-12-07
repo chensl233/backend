@@ -111,7 +111,7 @@ export default {
       let validResult = this.$refs.form.valid();
       if (validResult.result) {
         let data = this.schoolMould;
-        R.CourseMoudle.Update(data).then(res=>{
+        R.CourseMould.Update(data).then(res=>{
           this.$emit('success', res);
         })
       }
@@ -132,7 +132,7 @@ export default {
         });
     },
     init() {
-        R.CourseMoudle.Edit({mould_id:this.mould_id}).then(res => {
+        R.CourseMould.Edit({mould_id:this.mould_id}).then(res => {
             this.schoolMould = res.data;
             let major_id = res.data.major_id;
             this.getMajor().then(resp=>{

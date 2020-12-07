@@ -38,6 +38,11 @@
               {{data.school_name|nullToStr}}
             </template>
         </TableItem>
+        <TableItem title="适用院校">
+            <template slot-scope="{ data }">
+              {{data.school_name|intToType}}
+            </template>
+        </TableItem>
         <TableItem title="适用专业">
             <template slot-scope="{ data }">
               {{data.major_name|nullToStr}}
@@ -54,7 +59,7 @@
           <template slot-scope="{ data }">
             <p-del-button permission="course.destroy" @click="remove(datas, data)"></p-del-button>
             <p-button glass="h-btn h-btn-s h-btn-primary" permission="course.edit" text="编辑" @click="edit(data)"></p-button>
-            <p-button glass="h-btn h-btn-s" permission="course.watchRecords" text="查看课程" @click="showCourseMould(data)"></p-button>
+            <p-button glass="h-btn h-btn-s" permission="course.watchRecords" text="查看课程" @click="showMouldCourse(data)"></p-button>
           </template>
         </TableItem>
       </Table>
@@ -89,6 +94,22 @@ export default {
   filters:{
       nullToStr : (value)=>{
         return value!=null?value:'通用';
+      },
+      intToType : (value)=>{
+        switch (value) {
+          case 1:
+            return '专科';
+            break;
+        case 2:
+            return '本科';
+            break;
+        case 3:
+            return '研究生';
+            break;
+          default:
+            return '专科';
+            break;
+        }
       }
   },
   methods: {
@@ -112,28 +133,28 @@ export default {
       }
       this.loading = true;
       let cond = Object.assign(this.cond, this.pagination);
-      R.CourseMoudle.List(cond).then(resp => {
+      R.CourseMould.List(cond).then(resp => {
         this.datas = resp.data.data;
         this.pagination.total = resp.data.total;
         this.loading = false;
       });
     },
-    showCourseMould(item){
+    showMouldCourse(item){
       this.$Modal({
         closeOnMask: false,
         hasCloseIcon: true,
         component: {
           vue: resolve => {
-            require(['./show_course_mould'], resolve);
+            require(['./show_mould_course'], resolve);
           },
           datas: {
-            mould_id: item.mould_id
+            mould_info: item
           }
         }
       });
     },
     remove(data, item) {
-      R.CourseMoudle.Delete({ mould_id: item.mould_id }).then(resp => {
+      R.CourseMould.Delete({ mould_id: item.mould_id }).then(resp => {
         HeyUI.$Message.success('成功');
         this.getData();
       });

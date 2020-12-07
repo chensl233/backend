@@ -111,7 +111,7 @@ export default {
       let validResult = this.$refs.form.valid();
       if (validResult.result) {
         let data = this.schoolMould;
-        R.CourseMoudle.Store(data).then(res=>{
+        R.CourseMould.Store(data).then(res=>{
           this.$emit('success', res);
         })
       }

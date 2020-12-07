@@ -399,22 +399,34 @@ const Request = {
       return Ajax.delete('/course_attach/' + param.id, param);
     }
   },
-  CourseMoudle: {
+  CourseMould: {
     List(param) {
-      return Ajax.get('/course_moudle',param);
+      return Ajax.get('/course_mould',param);
     },
     Delete(param) {
-      return Ajax.delete('/course_moudle/' + param.mould_id);
+      return Ajax.delete('/course_mould/' + param.mould_id);
     },
     Store(param) {
-      return Ajax.postJson('/course_moudle',param);
+      return Ajax.postJson('/course_mould',param);
     },
     Edit(param) {
-      return Ajax.get('/course_moudle/'+param.mould_id);
+      return Ajax.get('/course_mould/'+param.mould_id);
     },
     Update(param) {
-      return Ajax.putJson('/course_moudle/' + param.mould_id, param);
+      return Ajax.putJson('/course_mould/' + param.mould_id, param);
     },
+    CourseList(param) {
+      return Ajax.get('/course_mould/1/courseList' , param);
+    },
+    MouldCourseList(param) {
+      return Ajax.get('/course_mould/'+param.mould_id+'/mouldCourseList');
+    },
+    MouldCourseDelete(param) {
+      return Ajax.delete('/course_mould/'+param.mould_id+'/mouldCourseDelete',{data:param});
+    },
+    MouldCourseStore(param) {
+      return Ajax.postJson('/course_mould/'+param.mould_id+'/mouldCourseStore',param);
+    }
   },
   Video: {
     List(param) {
