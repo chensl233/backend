@@ -412,6 +412,9 @@ const Request = {
     Edit(param) {
       return Ajax.get('/course_moudle/'+param.mould_id);
     },
+    Update(param) {
+      return Ajax.putJson('/course_moudle/' + param.mould_id, param);
+    },
   },
   Video: {
     List(param) {

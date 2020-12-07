@@ -7,12 +7,12 @@
       <div class="mb-10">
         <Form>
           <Row :space="10">
-            <Cell :width="9">
+            <Cell :width="8">
               <FormItem label="搜索">
                 <input type="text" v-model="cond.school_name" placeholder="院校名称" />
               </FormItem>
             </Cell>
-            <Cell :width="9">
+            <Cell :width="8">
               <FormItem label="搜索">
                 <input type="text" v-model="cond.keywords" placeholder="模板标题" />
               </FormItem>
@@ -150,6 +150,7 @@ export default {
         events: {
           success: (modal, data) => {
             modal.close();
+            HeyUI.$Message.success('成功');
             this.getData(true);
           }
         }
@@ -171,6 +172,7 @@ export default {
         events: {
           success: (modal, data) => {
             modal.close();
+            HeyUI.$Message.success('成功');
             this.getData(true);
           }
         }

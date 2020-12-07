@@ -68,7 +68,7 @@
         </Row>
 
         <FormItem>
-          <Button color="primary" @click="create()">确认操作</Button>
+          <Button color="primary" @click="update()">确认操作</Button>
         </FormItem>
       </Form>
     </div>
@@ -107,17 +107,16 @@ export default {
     };
   },
   methods: {
-    create() {
+    update() {
       let validResult = this.$refs.form.valid();
       if (validResult.result) {
         let data = this.schoolMould;
-        R.CourseMoudle.Store(data).then(res=>{
-          return false;
+        R.CourseMoudle.Update(data).then(res=>{
           this.$emit('success', res);
         })
       }
     },
-    getMajor() {
+    async getMajor() {
       if(this.schoolMould.major_level){
         this.schoolMould.major_id = null;
         R.School.SchoolMajor(this.schoolMould).then(res => {
@@ -133,10 +132,12 @@ export default {
         });
     },
     init() {
-        console.log(this.mould_id);
         R.CourseMoudle.Edit({mould_id:this.mould_id}).then(res => {
             this.schoolMould = res.data;
-            console.log(this.schoolMould);
+            let major_id = res.data.major_id;
+            this.getMajor().then(resp=>{
+                this.schoolMould.major_id = major_id;
+            });
         });
     }
   },
