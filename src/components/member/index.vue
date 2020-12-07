@@ -14,7 +14,7 @@
 <template>
   <div class="table-basic-vue frame-page h-panel">
     <div class="h-panel-bar">
-      <span class="h-panel-title">全部用户</span>
+      <span class="h-panel-title">全部学员</span>
     </div>
     <div class="h-panel-body">
       <div class="float-box mb-10">
@@ -22,7 +22,7 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="用户昵称/手机号" />
+                <input type="text" v-model="cond.keywords" placeholder="学员昵称/手机号" />
               </FormItem>
             </Cell>
             <Cell :width="6">
@@ -46,31 +46,34 @@
       </div>
       <div class="float-box mb-10">
         <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="添加" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="memberImport()"></p-button>
       </div>
       <div class="float-box mb-10">
         <Table :loading="loading" :datas="datas" @sort="sortEvt">
-          <TableItem title="用户" :width="240">
-            <template slot-scope="{ data }">
-              <copytext :copytext="data.id" />
-              <span class="grey">/</span>
-              <copytext :copytext="data.nick_name" />
-              <span class="grey">/</span>
-              <copytext :copytext="data.mobile" />
-            </template>
-          </TableItem>
-          <TableItem prop="created_at" title="注册时间" :sort="true" :width="120"></TableItem>
-          <TableItem title="VIP" :width="100">
-            <template slot-scope="{ data }">
-              <template v-if="data.role">{{ data.role.name }}</template>
-            </template>
-          </TableItem>
-          <TableItem title="备注" :width="200">
-            <template slot-scope="{ data }">
-              <template v-if="typeof userRemarks[data.id] !== 'undefined'">
-                <div v-html="userRemarks[data.id].remark"></div>
+          <TableItem title="所属院校" :width="180">
+              <template slot-scope="{ data }">
+                <copytext  :copytext="data.school.school_name" />
               </template>
+          </TableItem>
+
+          <TableItem prop="nick_name" title="姓名" :width="120"></TableItem>
+          <TableItem prop="idcard" title="证件号" :width="160"></TableItem>
+          <TableItem prop="student_sn" title="学号" :width="130"></TableItem>
+          <TableItem title="培养层次" :width="140">
+            <template slot-scope="{ data }">
+              <copytext  :copytext="data.major.major_level|level" />
             </template>
           </TableItem>
+          <TableItem prop="major.major_name" title="专业" :width="140">
+            <template slot-scope="{ data }">
+              <copytext  :copytext="data.major.major_name" />
+            </template>
+          </TableItem>
+
+          <TableItem prop="student_income" title="入学时间" :width="130"></TableItem>
+
+          <TableItem prop="created_at" title="注册时间" :sort="true" :width="120"></TableItem>
+
           <TableItem title="操作" align="center" :width="240">
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.edit" text="编辑" @click="edit(data)"></p-button>
@@ -164,6 +167,26 @@ export default {
         }
       });
     },
+    memberImport() {
+      this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./import'], resolve);
+          }
+        },
+        events: {
+          success: (modal, data) => {
+            R.Member.Import(data).then(resp => {
+              modal.close();
+              HeyUI.$Message.success('成功');
+              this.getData(true);
+            });
+          }
+        }
+      });
+    },
     edit(item) {
       this.$Modal({
         closeOnMask: false,
@@ -233,6 +256,21 @@ export default {
         }
       });
     }
+  },
+  filters:{
+      level : (value)=>{
+        switch(value){
+          case 1:
+            return '专科';
+            break;
+          case 2:
+            return '本科';
+            break;
+          case 3:
+            return '研究生';
+            break;
+        }
+      }
   }
 };
 </script>

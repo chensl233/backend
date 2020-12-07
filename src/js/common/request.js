@@ -253,6 +253,9 @@ const Request = {
     Delete(param) {
       return Ajax.delete('/member/' + param.id);
     },
+    Import(param) {
+      return Ajax.postJson('/member/import', param);
+    },
     InviteBalanceWithdrawOrders(param) {
       return Ajax.get('/member/inviteBalance/withdrawOrders', param);
     },
