@@ -7,57 +7,58 @@
     <div class="h-panel-body">
       <Form ref="form" mode="block" :validOnChange="true" :showErrorTip="true" :labelWidth="110" :rules="rules" :model="course">
         <Row :space="10">
-          <Cell :width="6">
+          <Cell :width="16">
+            <FormItem label="课程名" prop="title">
+              <input type="text" v-model="course.title" />
+            </FormItem>
+          </Cell>
+          <Cell :width="8">
             <FormItem label="分类" prop="category_id">
               <Select v-model="course.category_id" :datas="courseCategories" keyName="id" titleName="name"></Select>
             </FormItem>
           </Cell>
-          <Cell :width="6">
-            <FormItem label="价格" prop="charge">
-              <input type="number" v-model="course.charge" placeholder="单位：元" />
+
+        </Row>
+        <Row :space="10">
+          <Cell :width="8">
+            <FormItem label="课程代码" prop="course_code">
+              <input type="text" v-model="course.course_code" />
             </FormItem>
           </Cell>
-          <Cell :width="6">
-            <FormItem label="上架时间" prop="published_at">
-              <DatePicker v-model="course.published_at" v-width="200" type="datetime"></DatePicker>
+          <Cell :width="8">
+            <FormItem label="课程学时" prop="course_hour">
+              <input type="number" step="1" min="0" v-model="course.course_hour" />
             </FormItem>
           </Cell>
-          <Cell :width="3">
-            <FormItem label="显示" prop="is_show">
-              <h-switch v-model="course.is_show" :trueValue="1" :falseValue="-1"></h-switch>
-            </FormItem>
-          </Cell>
-          <Cell :width="3">
-            <FormItem label="推荐" prop="is_rec">
-              <h-switch v-model="course.is_rec" :trueValue="1" :falseValue="0"></h-switch>
+          <Cell :width="8">
+            <FormItem label="学分" prop="title">
+              <input type="number" step="0.5" min="0" v-model="course.stu_credit" />
             </FormItem>
           </Cell>
         </Row>
 
         <Row :space="10">
-          <Cell :width="10">
-            <FormItem label="课程名" prop="title">
-              <input type="text" v-model="course.title" />
+          <Cell :width="8">
+            <FormItem label="评论开关" prop="comment_status">
+              <Select v-model="course.comment_status" :datas="commentStatus"></Select>
             </FormItem>
           </Cell>
-          <Cell :width="6">
-            <FormItem label="课程代码" prop="course_code">
-              <input type="text" v-model="course.course_code" />
-            </FormItem>
-          </Cell>
-          <Cell :width="4">
+          <Cell :width="8">
             <FormItem label="课程类型" prop="course_type">
               <Select v-model="course.course_type" :datas="courseType"></Select>
             </FormItem>
           </Cell>
           <Cell :width="4">
-            <FormItem label="评论开关" prop="comment_status">
-              <Select v-model="course.comment_status" :datas="commentStatus"></Select>
+            <FormItem label="是否网络课" prop="is_network">
+              <h-switch v-model="course.is_network" :trueValue="1" :falseValue="0"></h-switch>
+            </FormItem>
+          </Cell>
+          <Cell :width="4">
+            <FormItem label="是否毕业课" prop="is_graduate">
+              <h-switch v-model="course.is_graduate" :trueValue="1" :falseValue="0"></h-switch>
             </FormItem>
           </Cell>
         </Row>
-
-
 
         <FormItem label="Slug" prop="slug">
           <input type="text" v-model="course.slug" placeholder="不清楚可不填写" />
@@ -98,20 +99,21 @@ export default {
   components: { TinymceEditor },
   data() {
     return {
-      course: Course.parse({}),
+      course: {
+        course_type:1,
+        comment_status:1,
+        is_network:1,
+      },
       rules: {
         required: [
           'category_id',
           'thumb',
           'title',
-          'charge',
           'short_description',
-          'published_at',
-          'is_show',
-          'is_rec',
           'comment_status',
           'original_desc',
           'course_code',
+          'course_hour',
           'course_type'
         ]
       },
@@ -127,6 +129,16 @@ export default {
         },
         {
           title: '订阅后可评论',
+          key: 2
+        }
+      ],
+      teach_method: [
+        {
+          title: '网络',
+          key: 1
+        },
+        {
+          title: '面授',
           key: 2
         }
       ],
