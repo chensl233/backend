@@ -426,7 +426,10 @@ const Request = {
     },
     MouldCourseStore(param) {
       return Ajax.postJson('/course_mould/'+param.mould_id+'/mouldCourseStore',param);
-    }
+    },
+    MouldCourseUpdate(param) {
+      return Ajax.putJson('/course_mould/' + param.mould_id+'/mouldCourseUpdate', param);
+    },
   },
   Video: {
     List(param) {

@@ -55,16 +55,6 @@
                 <input type="text" v-model="schoolMould.mould_name" placeholder="例如:xx专业通用模板" />
             </FormItem>
           </Cell>
-          <Cell :width="8">
-            <FormItem label="适用学期" prop="term">
-                <Select
-                v-model="schoolMould.term"
-                :datas="term"
-                keyName="id"
-                titleName="name"
-                ></Select>
-            </FormItem>
-          </Cell>
         </Row>
 
         <FormItem>

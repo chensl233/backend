@@ -141,11 +141,11 @@ export default {
     },
     showMouldCourse(item){
       this.$Modal({
-        closeOnMask: false,
         hasCloseIcon: true,
+        closeOnMask: true,
         component: {
           vue: resolve => {
-            require(['./show_mould_course'], resolve);
+            require(['./mould_course'], resolve);
           },
           datas: {
             mould_info: item

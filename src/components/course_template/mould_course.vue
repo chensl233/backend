@@ -25,16 +25,8 @@
           适用专业：
           <copytext :copytext="mould_info.major_name|nullToStr" />
         </Cell>
-        <Cell width="12" class="mt-6 mb-6">
-          <Select
-            v-model="course_id"
-            :datas="course_list"
-            keyName="id"
-            titleName="title"
-            :filterable="true"
-            ></Select>
-        </Cell>
-        <Cell width="7" class="mt-4 mb-4">
+
+        <Cell width="24" class="mt-10 mb-10">
           <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.credit1.change" text="添加课程" @click="mouldCourseAdd()"></p-button>
         </Cell>
       </Row>
@@ -49,22 +41,26 @@
         <Cell width="24">
           <Table :datas="MouldCourse" class="mb-10">
 
-            <TableItem prop="title" title="课程名称" ></TableItem>
-            <TableItem prop="course_code" title="专属课程代码"></TableItem>
+            <TableItem prop="title" :width="180" title="课程名称" ></TableItem>
+            <TableItem prop="course_code" :width="150" title="专属课程代码"></TableItem>
             <TableItem prop="study_score" title="学分"></TableItem>
+            <TableItem prop="term" title="适用学期"></TableItem>
             <TableItem prop="study_time1" title="面授学时"></TableItem>
             <TableItem prop="study_time2" title="自学学时"></TableItem>
             <TableItem prop="study_time3" title="实践学时"></TableItem>
-            <TableItem prop="term" title="适用学期"></TableItem>
+            <TableItem prop="is_network" title="是否网络课"></TableItem>
+            <TableItem prop="is_thesis" title="是否论文课"></TableItem>
+            <TableItem prop="is_check" title="是否考察课"></TableItem>
+            <TableItem prop="is_graduate" title="是否毕业课"></TableItem>
             <TableItem title="课程类型">
               <template slot-scope="{ data }">
                 {{data.course_type|courseToType}}
               </template>
             </TableItem>
 
-            <TableItem prop="created_at" title="记录时间"></TableItem>
-            <TableItem title="操作" align="center" :width="240">
+            <TableItem title="操作" align="center" :width="200">
               <template slot-scope="{ data }">
+                <p-button glass="h-btn h-btn-s h-btn-primary" permission="course.edit" text="编辑" @click="mouldCourseEdit(data)"></p-button>
                 <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="mouldCourseDel(data)"></p-del-button>
               </template>
             </TableItem>
@@ -102,7 +98,6 @@ export default {
   },
   mounted() {
     this.getMouldCourse();
-    this.getCourse();
   },
   methods: {
     getMouldCourse(){
@@ -114,15 +109,47 @@ export default {
         this.getMouldCourse();
     },
     mouldCourseAdd() {
-      if(this.course_id){
-        let data = {};
-        data.mould_id = this.mould_info.mould_id;
-        data.course_id = this.course_id;
-        R.CourseMould.MouldCourseStore(data).then(res => {
+      this.$Modal({
+        hasCloseIcon: true,
+        closeOnMask: false,
+        component: {
+          vue: resolve => {
+            require(['./mould_course_save'], resolve);
+          },
+          datas: {
+            mould_id: this.mould_info.mould_id,
+          }
+        },
+        events: { 
+          success: (modal, data) => {
             HeyUI.$Message.success('添加成功');
+            modal.close();
             this.getMouldCourse();
-        });
-      }
+          }
+        }
+      });
+    },
+    mouldCourseEdit(item) {
+      this.$Modal({
+        hasCloseIcon: true,
+        closeOnMask: false,
+        component: {
+          vue: resolve => {
+            require(['./mould_course_save'], resolve);
+          },
+          datas: {
+            mould_id: this.mould_info.mould_id,
+            course_info: item
+          }
+        },
+        events: { 
+          success: (modal, data) => {
+            HeyUI.$Message.success('编辑成功');
+            modal.close();
+            this.getMouldCourse();
+          }
+        }
+      });
     },
     mouldCourseDel(item) {
       let data = {};
@@ -131,11 +158,6 @@ export default {
       R.CourseMould.MouldCourseDelete(data).then(res => {
           HeyUI.$Message.success('删除成功');
           this.getMouldCourse();
-      });
-    },
-    getCourse() {
-      R.CourseMould.CourseList().then(res=>{
-        this.course_list = res.data.data;
       });
     },
 

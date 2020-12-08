@@ -45,7 +45,7 @@
         <TableItem prop="title" title="课程"></TableItem>
         <TableItem prop="course_code" title="课程代码"></TableItem>
         <TableItem prop="course_hour" title="课程学时"></TableItem>
-        <TableItem prop="stu_credit" title="课程学分"></TableItem>
+        <TableItem prop="study_score" title="课程学分"></TableItem>
         <TableItem title="课程类型">
             <template slot-scope="{ data }">
               {{data.course_type|intToType}}

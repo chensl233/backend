@@ -32,7 +32,7 @@
           </Cell>
           <Cell :width="8">
             <FormItem label="学分" prop="title">
-              <input type="number" step="0.5" min="0" v-model="course.stu_credit" />
+              <input type="number" step="0.5" min="0" v-model="course.study_score" />
             </FormItem>
           </Cell>
         </Row>
