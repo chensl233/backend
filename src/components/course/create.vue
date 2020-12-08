@@ -111,7 +111,7 @@ export default {
           'title',
           'short_description',
           'comment_status',
-          'original_desc',
+          // 'original_desc',
           'course_code',
           'course_hour',
           'course_type'
