@@ -6,7 +6,7 @@
         <Button class="h-btn h-btn-primary" icon="h-icon-plus" @click="create()">添加</Button>
       </p>
       <Table :loading="loading" :datas="datas">
-        <TableItem prop="display_name" title="角色名"></TableItem>
+        <TableItem prop="display_name" title="权限名"></TableItem>
         <TableItem prop="slug" title="Slug"></TableItem>
         <TableItem prop="description" title="描述"></TableItem>
         <TableItem prop="method" title="Method"></TableItem>
@@ -73,11 +73,9 @@ export default {
         },
         events: {
           success: (modal, data) => {
-            R.Administrator.Store(data).then(resp => {
               modal.close();
               HeyUI.$Message.success('成功');
               this.getData(true);
-            });
           }
         }
       });

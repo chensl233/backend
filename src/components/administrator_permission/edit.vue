@@ -10,13 +10,17 @@
             <template v-slot:label>角色名</template>
             <input type="text" v-model="permission.display_name" />
           </FormItem>
+          <FormItem label="Slug" prop="slug">
+            <template v-slot:label>Slug</template>
+            <input type="text" v-model="permission.slug" />
+          </FormItem>
           <FormItem label="描述" prop="description">
             <template v-slot:label>描述</template>
             <input type="text" v-model="permission.description" />
           </FormItem>
           <FormItem label="Method" prop="method">
             <template v-slot:label>Method</template>
-            <Select v-model="permission.method" :multiple="true" :datas="methods"></Select>
+            <Select v-model="permission.method" :datas="methods"></Select>
           </FormItem>
           <FormItem label="URL" prop="url">
             <template v-slot:label>URL</template>
@@ -39,7 +43,7 @@ export default {
     return {
       permission: Permission.parse({}),
       rules: {
-        required: ['display_name', 'description', 'url', 'method']
+        required: ['display_name', 'description','slug', 'url', 'method']
       },
       methods: [
         {

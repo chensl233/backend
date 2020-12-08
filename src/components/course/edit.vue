@@ -62,9 +62,6 @@
         <FormItem label="Slug" prop="slug">
           <input type="text" v-model="course.slug" placeholder="不清楚可不填写" />
         </FormItem>
-        <FormItem label="Slug" prop="slug">
-          <input type="text" v-model="course.slug" placeholder="不清楚可不填写" />
-        </FormItem>
 
         <FormItem label="课程封面" prop="thumb">
           <image-upload v-model="course.thumb" name="课程封面"></image-upload>
@@ -114,7 +111,7 @@ export default {
           'is_show',
           'is_rec',
           'comment_status',
-          'original_desc',
+          // 'original_desc',
           'course_code',
           'course_type'
         ]

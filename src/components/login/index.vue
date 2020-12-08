@@ -134,7 +134,7 @@
       </div>
       <p class="copyright">
         Copyright © 2020 -
-        <a href="#">Qswork</a>
+        <a href="#">轻松在线课堂管理后台</a>
       </p>
     </div>
   </div>

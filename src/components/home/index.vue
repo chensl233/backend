@@ -36,7 +36,7 @@
       <Cell :xs='24' :sm='24' :md='24' :lg='14' :xl='14'>
         <div class="h-panel">
           <div class="relative">
-            <Tabs class="common-panel-tabs" v-model="type" :datas="{type1: '活跃趋势'}"></Tabs>
+            <Tabs class="common-panel-tabs" v-model="type" :datas="{type1: '学生学习进度趋势'}"></Tabs>
             <!-- <div class="middle-right" style="right: 25px;"><span class="text-hover" @click="openMore">查看更多</span></div> -->
           </div>
           <div class="home-part-body">

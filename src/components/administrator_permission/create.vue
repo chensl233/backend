@@ -4,13 +4,10 @@
     <div class="table-basic-vue frame-page h-panel">
       <div class="h-panel-bar"><span class="h-panel-title">添加权限</span></div>
       <div class="h-panel-body">
-        <p>
-          <Button class="h-btn h-btn-primary" icon="icon-arrow-left" @click="back()">返回列表</Button>
-        </p>
 
         <Form v-width="400" mode="block" ref="form" :validOnChange="true" :showErrorTip="true" :labelWidth="110" :rules="rules" :model="permission">
-          <FormItem label="角色名" prop="display_name">
-            <template v-slot:label>角色名</template>
+          <FormItem label="权限名" prop="display_name">
+            <template v-slot:label>权限名</template>
             <input type="text" v-model="permission.display_name" />
           </FormItem>
           <FormItem label="Slug" prop="slug">
@@ -23,7 +20,7 @@
           </FormItem>
           <FormItem label="Method" prop="method">
             <template v-slot:label>Method</template>
-            <Select v-model="permission.method" :multiple="true" :datas="methods"></Select>
+            <Select v-model="permission.method" :datas="methods"></Select>
           </FormItem>
           <FormItem label="URL" prop="url">
             <template v-slot:label>URL</template>
@@ -68,20 +65,13 @@ export default {
     };
   },
   mounted() {
-    this.init();
   },
   methods: {
-    init() {
-    },
-    back() {
-      this.$router.push({ name: 'AdministratorPermission' });
-    },
     create() {
       let validResult = this.$refs.form.valid();
       if (validResult.result) {
         R.AdministratorPermission.Create(this.permission).then(resp => {
-          HeyUI.$Message.success('成功');
-          this.$router.push({ name: 'AdministratorPermission' });
+          this.$emit('success');
         });
       }
     }

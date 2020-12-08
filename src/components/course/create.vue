@@ -170,7 +170,7 @@ export default {
     create() {
       let validResult = this.$refs.form.valid();
       if (validResult.result) {
-        this.course.render_desc = this.course.original_desc;
+        // this.course.render_desc = this.course.original_desc;
         R.Course.Create(this.course).then(resp => {
           HeyUI.$Message.success('添加成功');
           this.$emit('success');

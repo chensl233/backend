@@ -11,7 +11,7 @@
 
 <template>
   <div class="app-footer">
-    PowerBy <a href="#">Qswork</a>
+    PowerBy <a href="#">轻松在线课堂管理后台</a>
   </div>
 </template>
 <script>
