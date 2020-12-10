@@ -22,6 +22,7 @@
                 :datas="course_list"
                 keyName="id"
                 titleName="title"
+                filterable="true"
                 @change="courseDetail()"
                 ></Select>
             </FormItem>

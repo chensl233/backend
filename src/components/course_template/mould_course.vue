@@ -101,9 +101,12 @@ export default {
   },
   methods: {
     getMouldCourse(){
-      R.CourseMould.MouldCourseList(this.mould_info).then(res => {
+      let data = this.paginate.courses;
+      data.mould_id = this.mould_info.mould_id;
+      R.CourseMould.MouldCourseList(data).then(res => {
         this.MouldCourse = res.data.data;
-      })
+        this.paginate.courses.total = res.data.total;
+      }) 
     },
     paginateChange(t) {
         this.getMouldCourse();

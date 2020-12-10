@@ -419,7 +419,7 @@ const Request = {
       return Ajax.get('/course_mould/1/courseList' , param);
     },
     MouldCourseList(param) {
-      return Ajax.get('/course_mould/'+param.mould_id+'/mouldCourseList');
+      return Ajax.get('/course_mould/'+param.mould_id+'/mouldCourseList',param);
     },
     MouldCourseDelete(param) {
       return Ajax.delete('/course_mould/'+param.mould_id+'/mouldCourseDelete',{data:param});
