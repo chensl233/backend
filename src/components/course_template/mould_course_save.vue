@@ -22,7 +22,7 @@
                 :datas="course_list"
                 keyName="id"
                 titleName="title"
-                filterable="true"
+                :filterable="true"
                 @change="courseDetail()"
                 ></Select>
             </FormItem>
@@ -170,7 +170,6 @@ export default {
   },
    mounted() {
     this.getCourse();
-    console.log(this.course_info);
     if(this.course_info){
         this.mouldCourse = this.course_info;
     }

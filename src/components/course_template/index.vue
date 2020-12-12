@@ -33,24 +33,20 @@
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
         <TableItem prop="mould_id" title="模板ID"  :width="80"></TableItem>
         <TableItem prop="mould_name" :width="300" title="模板名称"></TableItem>
-        <TableItem title="适用院校">
+        <TableItem :width="200" title="适用院校">
             <template slot-scope="{ data }">
               {{data.school_name|nullToStr}}
             </template>
         </TableItem>
-        <TableItem title="适用院校">
-            <template slot-scope="{ data }">
-              {{data.school_name|intToType}}
-            </template>
-        </TableItem>
-        <TableItem title="适用专业">
+
+        <TableItem :width="180" title="适用专业">
             <template slot-scope="{ data }">
               {{data.major_name|nullToStr}}
             </template>
         </TableItem>
-        <TableItem title="适用学期">
+        <TableItem :width="80" title="课程数量">
             <template slot-scope="{ data }">
-              第{{data.term}}学期
+              {{data.course_mould_count}}
             </template>
         </TableItem>
         <TableItem prop="created_at" :width="110" title="创建时间"></TableItem>
