@@ -108,7 +108,6 @@ export default {
           'charge',
           'short_description',
           'published_at',
-          'is_show',
           'is_rec',
           'comment_status',
           // 'original_desc',

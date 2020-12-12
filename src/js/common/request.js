@@ -375,6 +375,9 @@ const Request = {
     Delete(param) {
       return Ajax.delete('/course/' + param.id, param);
     },
+    Import(param) {
+      return Ajax.postJson('/course/import',param);
+    },
     WatchRecords(param) {
       return Ajax.get('/course/' + param.id + '/watch/records', param);
     },

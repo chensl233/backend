@@ -13,12 +13,12 @@
               </FormItem>
             </Cell>
             <Cell :width="4">
-              <FormItem label="课程ID">
+              <FormItem label="课程代码">
                 <input type="text" v-model="cond.course_code" placeholder="课程代码" />
               </FormItem>
             </Cell>
             <Cell :width="4">
-              <FormItem label="搜索">
+              <FormItem label="课程标题">
                 <input type="text" v-model="cond.keywords" placeholder="课程标题" />
               </FormItem>
             </Cell>
@@ -39,6 +39,8 @@
       </div>
       <div class="mb-10">
         <p-button glass="h-btn h-btn-primary" icon="h-icon-plus" permission="course.store" text="添加" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary" icon="h-icon-plus" permission="member.store" text="批量导入" @click="courseImport()"></p-button>
+
       </div>
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
         <TableItem prop="id" title="CID" :sort="true" :width="80"></TableItem>
@@ -250,7 +252,24 @@ export default {
           }
         }
       });
-    }
+    },
+    courseImport() {
+      this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./import'], resolve);
+          }
+        },
+        events: {
+          success: (modal, data) => {
+              modal.close();
+              this.getData(true);
+          }
+        }
+      });
+    },
   }
 };
 </script>

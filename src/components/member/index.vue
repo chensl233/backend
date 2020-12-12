@@ -26,8 +26,8 @@
               </FormItem>
             </Cell>
             <Cell :width="6">
-              <FormItem label="专业">
-                <Select :filterable="true" keyName="id" titleName="name"></Select>
+              <FormItem label="搜索">
+                <input type="text" v-model="cond.major" placeholder="专业名称/代码" />
               </FormItem>
             </Cell>
 
