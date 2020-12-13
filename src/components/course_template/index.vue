@@ -38,7 +38,11 @@
               {{data.school_name|nullToStr}}
             </template>
         </TableItem>
-
+        <TableItem :width="100" title="适用层次">
+            <template slot-scope="{ data }">
+              {{data.major_level|intToType}}
+            </template>
+        </TableItem>
         <TableItem :width="180" title="适用专业">
             <template slot-scope="{ data }">
               {{data.major_name|nullToStr}}

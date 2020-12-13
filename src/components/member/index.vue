@@ -67,7 +67,7 @@
           </TableItem>
           <TableItem title="年级" :width="100"> 
             <template slot-scope="{ data }">
-              <copytext  :copytext="data.student_income|sub_info" />
+              <copytext  :copytext="data.student_grade" />
             </template>
           </TableItem>
 
@@ -270,11 +270,6 @@ export default {
             break;
         }
       },
-      sub_info : (value)=>{
-        if(!value) return '-';
-        return value.substr(0, 4) + '级';
-      }
-      
   }
 };
 </script>

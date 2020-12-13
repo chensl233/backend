@@ -23,7 +23,7 @@
         </Row>
         <Row :space="10">
           <Cell :width="6">
-            <FormItem label="昵称" prop="nick_name">
+            <FormItem label="学员姓名" prop="nick_name">
               <input type="text" v-model="user.nick_name" />
             </FormItem>
           </Cell>
@@ -33,39 +33,84 @@
             </FormItem>
           </Cell>
           <Cell :width="6">
+            <FormItem label="身份证号" prop="mobile">
+              <input type="text" v-model="user.idcard" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
             <FormItem label="密码" prop="password">
               <input type="text" v-model="user.password" />
             </FormItem>
           </Cell>
         </Row>
         <Row :space="10">
-          <Cell :width="3">
-            <FormItem label="激活" prop="is_active">
-              <h-switch v-model="user.is_active" :trueValue="1" :falseValue="-1"></h-switch>
-            </FormItem>
-          </Cell>
-          <Cell :width="3">
-            <FormItem label="锁定" prop="is_lock">
-              <h-switch v-model="user.is_lock" :trueValue="1" :falseValue="-1"></h-switch>
-            </FormItem>
-          </Cell>
-        </Row>
-        <Row :space="10">
           <Cell :width="6">
-            <FormItem label="VIP" prop="role_id">
+            <FormItem label="所属院校" prop="school_id">
               <Select
-                v-model="user.role_id"
-                :datas="roles"
+                v-model="user.school_id"
+                :datas="school_list"
+                :filterable="true"
+                keyName="school_id"
+                titleName="school_name"
+                @change="getMajor()"
+                ></Select>
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="专业层次" prop="major_level">
+                <Select
+                v-model="user.major_level"
+                :datas="major_level"
                 keyName="id"
                 titleName="name"
-                :filterable="true"
-                @change="selectCourse"
+                @change="getMajor()"
+                ></Select>
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="学生专业" prop="major_id">
+              <Select
+              v-model="user.major_id" 
+              :datas="major_list" 
+              :filterable="true" 
+              keyName='major_id'
+              titleName='major_name' 
+              @change="getCourseMould()"
               ></Select>
             </FormItem>
           </Cell>
           <Cell :width="6">
-            <FormItem label="会员到期时间" prop="role_expired_at">
-              <DatePicker v-model="user.role_expired_at" v-width="200" type="datetime"></DatePicker>
+            <FormItem label="课程方案" prop="mould_id">
+              <Select
+              v-model="user.mould_id" 
+              :datas="mould_list" 
+              :filterable="true" 
+              keyName='mould_id'
+              titleName='mould_name'>
+              </Select>
+            </FormItem>
+          </Cell>
+
+        </Row>
+        <Row :space="10">
+          <Cell :width="6">
+            <FormItem label="学生学号" prop="student_sn">
+              <input type="text" v-model="user.student_sn" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="学生来源" prop="student_from">
+              <input type="text" v-model="user.student_from" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="学生年级" prop="student_grade">
+              <input type="text" v-model="user.student_grade" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="入学时间" prop="student_income">
+              <DatePicker v-model="user.student_income" ></DatePicker>
             </FormItem>
           </Cell>
         </Row>
@@ -85,15 +130,24 @@ export default {
     return {
       user: User.parse({}),
       rules: {
-        required: ['avatar', 'password', 'mobile', 'nick_name']
+        required: ['avatar', 'password', 'mobile', 'nick_name','school_id','major_id','major_level','mould_id','student_income']
       },
-      roles: []
+      roles: [],
+      school_list: [],
+      major_list:[],
+      mould_list:[],
+      major_level:[
+        {id:1,name:'专科'},
+        {id:2,name:'本科'},
+        {id:3,name:'研究生'},
+      ],
     };
   },
   mounted() {
     R.Member.Create().then(res => {
       this.roles = res.data.roles;
     });
+    this.getSchool();
   },
   methods: {
     create() {
@@ -101,7 +155,33 @@ export default {
       if (validResult.result) {
         this.$emit('success', this.user);
       }
+    },
+    getSchool() {
+        R.School.List().then(res => {
+          this.school_list = res.data.data;
+        });
+    },
+    getMajor() {
+      if(this.user.major_level){
+        this.user.major_id = null;
+        let data = {};
+        data.major_level = this.user.major_level;
+        data.school_id = this.user.school_id;
+        R.School.SchoolMajor(data).then(res => {
+            this.major_list = res.data.data;
+        });
+      }
+    },
+    getCourseMould() {
+      let data = {};
+      data.major_id = this.user.major_id;
+      data.school_id = this.user.school_id;
+      data.major_level = this.user.major_level;
+      R.CourseMould.List(data).then(res => {
+        this.mould_list = res.data.data;
+      });
     }
+    
   }
 };
 </script>
