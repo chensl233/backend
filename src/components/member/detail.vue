@@ -147,12 +147,8 @@
             </TableItem>
             <TableItem prop="created_at" title="开始时间"></TableItem>
             <TableItem prop="watched_at" title="看完的时间"></TableItem>
-            <TableItem title="看完">
-              <template slot-scope="{ data }">
-                <span v-if="data.is_watched" class="red">是</span>
-                <span v-else>否</span>
-              </template>
-            </TableItem>
+            <TableItem prop="watch_seconds" title="观看时长" unit="s"></TableItem>
+
           </Table>
           <Pagination align="right" v-model="paginate.history" @change="paginateChange('history')" />
         </Cell>

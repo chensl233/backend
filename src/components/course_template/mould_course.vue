@@ -184,10 +184,10 @@ export default {
       courseToType : (value)=>{
         switch(value){
           case 1:
-            return '选修';
+            return '必修';
             break;
           case 2:
-            return '必修';
+            return '选修';
             break;
         }
       }
