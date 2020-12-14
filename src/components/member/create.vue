@@ -12,8 +12,7 @@
         :showErrorTip="true"
         :labelWidth="110"
         :rules="rules"
-        :model="user"
-      >
+        :model="user" >
         <Row :space="10">
           <Cell :width="24">
             <FormItem label="头像" prop="avatar">
@@ -22,7 +21,7 @@
           </Cell>
         </Row>
         <Row :space="10">
-          <Cell :width="6">
+          <Cell :width="12">
             <FormItem label="学员姓名" prop="nick_name">
               <input type="text" v-model="user.nick_name" />
             </FormItem>
@@ -33,13 +32,20 @@
             </FormItem>
           </Cell>
           <Cell :width="6">
+            <FormItem label="密码" prop="password">
+              <input type="text" v-model="user.password" />
+            </FormItem>
+          </Cell>
+        </Row>
+        <Row :space="10">
+          <Cell :width="12">
             <FormItem label="身份证号" prop="mobile">
               <input type="text" v-model="user.idcard" />
             </FormItem>
           </Cell>
-          <Cell :width="6">
-            <FormItem label="密码" prop="password">
-              <input type="text" v-model="user.password" />
+          <Cell :width="12">
+            <FormItem label="邮箱" prop="email">
+              <input type="text" v-model="user.email" />
             </FormItem>
           </Cell>
         </Row>
@@ -164,6 +170,7 @@ export default {
     getMajor() {
       if(this.user.major_level){
         this.user.major_id = null;
+        this.user.mould_id = null;
         let data = {};
         data.major_level = this.user.major_level;
         data.school_id = this.user.school_id;
@@ -173,6 +180,7 @@ export default {
       }
     },
     getCourseMould() {
+      this.user.mould_id = null;
       let data = {};
       data.major_id = this.user.major_id;
       data.school_id = this.user.school_id;
