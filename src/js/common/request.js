@@ -353,6 +353,11 @@ const Request = {
       return Ajax.get('/grade',param);
     }
   },
+  TeachProgress: {
+    List(param) {
+      return Ajax.get('/teachProgress',param);
+    }
+  },
   Course: {
     List(param) {
       return Ajax.get('/course', param);

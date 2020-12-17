@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { isAuthPage } from 'js/config/menu-config';
+import { resolve } from 'core-js/fn/promise';
 
 Vue.use(VueRouter);
 
@@ -81,7 +82,7 @@ const initRouter = () => {
         path: '/member',
         name: 'Member',
         component: (resolve) => require(['components/member/index'], resolve),
-        meta: { title: '用户' }
+        meta: { title: '学籍管理' }
       },
       {
         path: '/member/InviteBalanceWithdrawOrders',
@@ -302,7 +303,12 @@ const initRouter = () => {
         name: 'GradeInfo',
         component: (resolve) => require(['components/grade/index'], resolve),
         meta: { title: '成绩汇总' }
-      },{
+      }, {
+        path: '/teachProgress',
+        name: 'teachProgress',
+        component: (resolve) => require(['components/teach_progress/index'], resolve),
+        meta: { title: '教学进度管理' }
+      }, {
         path: '*',
         name: 'CommonNotfoundError',
         component: (resolve) => require(['components/error-pages/404'], resolve),

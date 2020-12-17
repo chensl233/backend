@@ -52,7 +52,7 @@
           </TableItem>
           <TableItem title="年级" :width="100">
             <template slot-scope="{ data }">
-              2020级{{data.nianji}}
+              {{data.student_grade}}
             </template>
           </TableItem>
           <TableItem title="教育层次" align="center" :width="100">
