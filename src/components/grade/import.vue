@@ -1,15 +1,15 @@
 <template>
   <div class="h-panel w-1000">
     <div class="h-panel-bar">
-      <span class="h-panel-title">学员批量导入</span>
+      <span class="h-panel-title">成绩批量导入</span>
     </div>
     <div class="h-panel-body">
       <div class="float-box mb-30">
-        <!-- <a href="http://work3.com/excelMould/import_student_mould.xlsx" target="_blank">导入模板下载</a> -->
-        <a href="/excelMould/import_student_mould.xlsx" target="_blank">导入模板下载</a>
+        <!-- <a href="http://work3.com/excelMould/import_grade_mould.xlsx" target="_blank">导入模板下载</a> -->
+        <a href="/excelMould/import_grade_mould.xlsx" target="_blank">导入模板下载</a>
       </div>
       <div class="float-box mb-30">
-        <Button color="primary" @click="$refs.xlsfile.click()" v-tooltip placement="bottom-end" content="院校和专业不能用简称！">选择excel文件，支持：xls,xlsx格式文件</Button>
+        <Button color="primary" @click="$refs.xlsfile.click()">选择excel文件，支持：xls,xlsx格式文件</Button>
         <div style="display: none">
           <form ref="form">
             <input type="file" ref="xlsfile" />

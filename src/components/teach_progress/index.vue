@@ -28,8 +28,8 @@
       <div class="float-box mb-10">
          <Table :datas="student_list" >
             <TableItem title="学员姓名" prop="nick_name"></TableItem>
-            <TableItem title="学员编号" prop="student_sn"></TableItem>
-            <TableItem align="center" title="所属院校" >
+            <TableItem title="学员编号" :width='120' prop="student_sn"></TableItem>
+            <TableItem align="center" :width='180' title="所属院校" >
                 <template slot-scope="{ data }">
                   {{data.school.school_name}}
                 </template>
@@ -85,6 +85,7 @@ export default {
   methods: {
     getData(){
         let data = this.pagination;
+        data.student_sn = this.cond.student_sn;
         R.TeachProgress.List(data).then((res)=>{
             this.student_list = res.data.data;
             this.pagination.total = res.data.total;

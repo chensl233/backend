@@ -356,6 +356,9 @@ const Request = {
   TeachProgress: {
     List(param) {
       return Ajax.get('/teachProgress',param);
+    },
+    StudentDetail(param) {
+      return Ajax.get('/teachProgress/'+param.id+'/studentDetail',param);
     }
   },
   Course: {

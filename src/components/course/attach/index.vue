@@ -17,7 +17,7 @@
         <TableItem prop="id" title="ID"></TableItem>
         <TableItem prop="name" title="附件名"></TableItem>
         <TableItem prop="path" title="路径"></TableItem>
-        <TableItem prop="download_times" title="下载次数"></TableItem>
+        <TableItem prop="download_times" title="观看次数"></TableItem>
         <TableItem title="操作" align="center" :width="200">
           <template slot-scope="{ data }">
             <p-del-button permission="course_attach.destroy" @click="remove(datas, data)"></p-del-button>
