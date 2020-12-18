@@ -42,9 +42,14 @@
               <input type="text" v-model="user.idcard" />
             </FormItem>
           </Cell>
-          <Cell :width="12">
+          <Cell :width="6">
             <FormItem label="邮箱" prop="email">
               <input type="text" v-model="user.email" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="入学时间" prop="student_income">
+              <DatePicker v-model="user.student_income" ></DatePicker>
             </FormItem>
           </Cell>
         </Row>
@@ -114,8 +119,8 @@
             </FormItem>
           </Cell>
           <Cell :width="6">
-            <FormItem label="入学时间" prop="student_income">
-              <DatePicker v-model="user.student_income" ></DatePicker>
+            <FormItem label="当前学期" prop="term">
+              <input type="text" v-model="user.term" />
             </FormItem>
           </Cell>
         </Row>

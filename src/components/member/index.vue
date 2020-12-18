@@ -67,17 +67,18 @@
           <TableItem prop="student_sn" title="学号" :width="130"></TableItem>
           <TableItem title="培养层次" :width="140">
             <template slot-scope="{ data }">
-              <copytext  :copytext="data.major.major_level|level" />
+              {{data.major.major_level|level}}
             </template>
           </TableItem>
           <TableItem title="专业" :width="140">
             <template slot-scope="{ data }">
-              <copytext  :copytext="data.major.major_name" />
+              {{data.major.major_name}}
             </template>
           </TableItem>
-          <TableItem title="年级" :width="100"> 
+          <TableItem title="年级" prop="student_grade" :width="100"></TableItem>
+          <TableItem title="当前学期" :width="100"> 
             <template slot-scope="{ data }">
-              <copytext  :copytext="data.student_grade" />
+              <copytext  :copytext="data.term" />
             </template>
           </TableItem>
 
@@ -89,8 +90,8 @@
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.edit" text="编辑" @click="edit(data)"></p-button>
               <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
-              <p-button glass="h-btn h-btn-s" permission="member.detail" text="详情" @click="detail(data)"></p-button>
-              <p-button glass="h-btn h-btn-s" permission="member.remark" text="备注" @click="showRemark(data)"></p-button>
+              <!-- <p-button glass="h-btn h-btn-s" permission="member.detail" text="详情" @click="detail(data)"></p-button>
+              <p-button glass="h-btn h-btn-s" permission="member.remark" text="备注" @click="showRemark(data)"></p-button> -->
             </template>
           </TableItem>
         </Table>

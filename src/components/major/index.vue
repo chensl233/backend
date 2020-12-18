@@ -40,12 +40,9 @@
       </div>
       <div class="float-box mb-10">
         <Table :loading="loading" :datas="datas" @sort="sortEvt">
-          <TableItem title="专业名称" :width="240">
-            <template slot-scope="{ data }">
-              <copytext :copytext="data.major_name" />
-            </template>
-          </TableItem>
-          <TableItem title="教育层次" :width="240">
+          <TableItem prop="major_name" title="专业名称" :width="240"></TableItem>
+
+          <TableItem title="教育层次" :width="150">
             <template slot-scope="{ data }">
               <copytext  :copytext="data.major_level|level" />
             </template>
@@ -55,7 +52,7 @@
               <copytext :copytext="data.major_code" />
             </template>
           </TableItem>
-          <TableItem prop="created_at" title="创建时间" :sort="true" :width="120"></TableItem>
+          <TableItem prop="created_at" title="创建时间" :sort="true" :width="160"></TableItem>
 
           <TableItem title="操作" align="center" :width="240">
             <template slot-scope="{ data }">
