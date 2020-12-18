@@ -22,6 +22,7 @@
                 :datas="school_list"
                 keyName="school_id"
                 titleName="school_name"
+                :filterable="true" 
                 @change="getMajor()"
                 ></Select>
             </FormItem>

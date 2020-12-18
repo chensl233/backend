@@ -30,6 +30,17 @@
                 <input type="text" v-model="cond.major" placeholder="专业名称/代码" />
               </FormItem>
             </Cell>
+            <Cell :width="6">
+              <FormItem label="院校">
+                <Select
+                v-model="cond.school_id"
+                :datas="school_list"
+                keyName="school_id"
+                titleName="school_name"
+                :filterable="true" 
+                ></Select>
+              </FormItem>
+            </Cell>
 
             <Cell :width="6">
               <FormItem>
@@ -51,7 +62,6 @@
                 <copytext  :copytext="data.school.school_name" />
               </template>
           </TableItem>
-
           <TableItem prop="nick_name" title="姓名" :width="120"></TableItem>
           <TableItem prop="idcard" title="证件号" :width="160"></TableItem>
           <TableItem prop="student_sn" title="学号" :width="130"></TableItem>
@@ -113,10 +123,12 @@ export default {
       tags: [],
       userRemarks: [],
       temp:'2020级',
+      school_list:{}
     };
   },
   mounted() {
     this.getData(true);
+    this.getSchool();
   },
   methods: {
     changePage() {
@@ -253,6 +265,12 @@ export default {
             this.getData();
           }
         }
+      });
+    },
+    getSchool() {
+      R.School.List().then(res => {
+        this.school_list = res.data.data;
+        this.school_list.unshift({school_id:0,school_name:'通用'});
       });
     }
   },
