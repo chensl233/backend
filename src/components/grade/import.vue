@@ -58,7 +58,7 @@ export default {
         }
         // 请求导入api
         this.$refs.form.reset();
-        R.Member.Import({ data: parseData }).then(res => {
+        R.Grade.import({ data: parseData }).then(res => {
           HeyUI.$Message.success('导入成功');
           this.$emit('success');
         });

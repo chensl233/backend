@@ -351,6 +351,9 @@ const Request = {
   Grade: {
     List(param) {
       return Ajax.get('/grade',param);
+    },
+    import(param) {
+      return Ajax.post('/grade/import',param);
     }
   },
   TeachProgress: {
