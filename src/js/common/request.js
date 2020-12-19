@@ -429,6 +429,9 @@ const Request = {
     Update(param) {
       return Ajax.putJson('/course_mould/' + param.mould_id, param);
     },
+    Import(param) {
+      return Ajax.post('/course_mould/import',param);
+    },
     CourseList(param) { //获取课程列表
       return Ajax.get('/course_mould/1/courseList' , param);
     },

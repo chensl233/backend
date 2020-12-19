@@ -45,6 +45,11 @@
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
         <TableItem prop="id" title="CID" :sort="true" :width="80"></TableItem>
         <TableItem prop="title" title="课程"></TableItem>
+        <TableItem title="适用层次">
+          <template slot-scope="{data}">
+            {{data.major_level|level}}
+          </template>
+        </TableItem>
         <TableItem prop="course_code" title="课程代码"></TableItem>
         <TableItem prop="course_hour" title="课程学时"></TableItem>
         <TableItem prop="study_score" title="课程学分"></TableItem>
@@ -122,6 +127,19 @@ export default {
             break;
           case 2:
             return '选修';
+            break;
+        }
+      },
+      level : (value)=>{
+        switch(value){
+          case 1:
+            return '专科';
+            break;
+          case 2:
+            return '本科';
+            break;
+          case 3:
+            return '研究生';
             break;
         }
       }

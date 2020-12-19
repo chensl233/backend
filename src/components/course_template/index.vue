@@ -28,7 +28,9 @@
         </Form>
       </div>
       <div class="mb-10">
-        <p-button glass="h-btn h-btn-primary" icon="h-icon-plus" permission="course.store" text="添加模板" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="course.store" text="添加模板" @click="create()"></p-button>
+        <!-- <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="coureMouldImport()"></p-button> -->
+
       </div>
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
         <TableItem prop="mould_id" title="模板ID"  :width="80"></TableItem>
@@ -199,6 +201,25 @@ export default {
         }
       });
     },
+    coureMouldImport(){
+      this.$Modal({
+        hasCloseIcon: true,
+        closeOnMask: false,
+        component: {
+          vue: resolve => {
+            require(['./import'], resolve);
+          },
+        },
+        
+        events: {
+          success: (modal, data) => {
+            // modal.close();
+            // HeyUI.$Message.success('成功');
+            // this.getData(true);
+          }
+        }
+      });
+    }
     
   }
 };

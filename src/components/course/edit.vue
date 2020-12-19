@@ -19,19 +19,29 @@
           </Cell>
         </Row>
         <Row :space="10">
-          <Cell :width="8">
+          <Cell :width="6">
             <FormItem label="课程代码" prop="course_code">
               <input type="text" v-model="course.course_code" />
             </FormItem>
           </Cell>
-          <Cell :width="8">
+          <Cell :width="6">
             <FormItem label="课程学时" prop="course_hour">
               <input type="number" step="1" min="0" v-model="course.course_hour" />
             </FormItem>
           </Cell>
-          <Cell :width="8">
-            <FormItem label="学分" prop="title">
+          <Cell :width="6">
+            <FormItem label="学分" prop="study_score">
               <input type="number" step="0.5" min="0" v-model="course.study_score" />
+            </FormItem>
+          </Cell>
+          <Cell :width="6">
+            <FormItem label="适用层次" prop="major_level">
+              <Select
+                v-model="course.major_level"
+                :datas="major_level"
+                keyName="id"
+                titleName="name"
+              ></Select>
             </FormItem>
           </Cell>
         </Row>
@@ -136,7 +146,12 @@ export default {
           title: '选修',
           key: 2
         }
-      ]
+      ],
+      major_level:[
+        {id:1,name:'专科'},
+        {id:2,name:'本科'},
+        {id:3,name:'研究生'},
+      ],
     };
   },
   mounted() {
