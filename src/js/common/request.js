@@ -442,6 +442,17 @@ const Request = {
       return Ajax.putJson('/course_mould/' + param.mould_id+'/mouldCourseUpdate', param);
     },
   },
+  studentGrade: {
+    List(param) {
+      return Ajax.get('/studentGrade',param);
+    },
+    Edit(param) {
+      return Ajax.get('/studentGrade/'+param.grade_id);
+    },
+    Update(param) {
+      return Ajax.putJson('/studentGrade/'+param.grade_id,param);
+    },
+  },
   Video: {
     List(param) {
       return Ajax.get('/video', param);

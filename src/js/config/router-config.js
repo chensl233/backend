@@ -309,6 +309,12 @@ const initRouter = () => {
         component: (resolve) => require(['components/teach_progress/index'], resolve),
         meta: { title: '教学进度管理' }
       }, {
+        path: '/studentGrade',
+        name: 'studentGrade',
+        component: (resolve) => require(['components/student_grade/index'],resolve),
+        meta: { title: '班级管理'}
+      }
+      , {
         path: '*',
         name: 'CommonNotfoundError',
         component: (resolve) => require(['components/error-pages/404'], resolve),
