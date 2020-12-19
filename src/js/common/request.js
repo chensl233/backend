@@ -364,6 +364,11 @@ const Request = {
       return Ajax.get('/teachProgress/'+param.id+'/studentDetail',param);
     }
   },
+  Log: {
+    loginDetail(param) {
+      return Ajax.get('/log/loginDetail',param);
+    }
+  },
   Course: {
     List(param) {
       return Ajax.get('/course', param);
@@ -448,7 +453,7 @@ const Request = {
       return Ajax.putJson('/course_mould/' + param.mould_id+'/mouldCourseUpdate', param);
     },
   },
-  studentGrade: {
+  StudentGrade: {
     List(param) {
       return Ajax.get('/studentGrade',param);
     },

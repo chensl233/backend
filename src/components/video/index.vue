@@ -61,9 +61,6 @@
               <span class="video-title">{{ data.title }}</span>
             </template>
           </TableItem>
-          <TableItem title="价格" :width="80">
-            <template slot-scope="{ data }">￥{{ data.charge }}</template>
-          </TableItem>
           <TableItem title="时长" :width="90">
             <template slot-scope="{ data }">
               <duration-text :seconds="data.duration" />
@@ -72,7 +69,7 @@
           <TableItem title="操作" align="center" :width="200">
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="video.edit" text="编辑" @click="edit(data)"></p-button>
-              <p-button glass="h-btn h-btn-s" permission="video.subscribes" text="订阅" @click="showSubscribePage(data)"></p-button>
+              <!-- <p-button glass="h-btn h-btn-s" permission="video.subscribes" text="订阅" @click="showSubscribePage(data)"></p-button> -->
               <p-button glass="h-btn h-btn-s" permission="video.watch.records" text="观看记录" @click="showWatchRecords(data)"></p-button>
             </template>
           </TableItem>

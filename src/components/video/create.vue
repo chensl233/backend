@@ -18,19 +18,6 @@
                 <Select v-model="video.chapter_id" :datas="chapters" keyName="id" titleName="title" :filterable="true"></Select>
               </FormItem>
             </Cell>
-            <Cell :width="6">
-              <FormItem label="价格" prop="charge">
-                <div class="h-input-group" v-width="200">
-                  <input type="text" v-model="video.charge" />
-                  <span class="h-input-addon">元</span>
-                </div>
-              </FormItem>
-            </Cell>
-            <Cell :width="3">
-              <FormItem label="禁止购买" prop="is_ban_sell">
-                <h-switch v-model="video.is_ban_sell" :trueValue="1" :falseValue="0"></h-switch>
-              </FormItem>
-            </Cell>
             <Cell :width="3">
               <FormItem label="显示" prop="is_show">
                 <h-switch v-model="video.is_show" :trueValue="1" :falseValue="0"></h-switch>
@@ -212,11 +199,8 @@ export default {
         required: [
           'course_id',
           'title',
-          'charge',
           'short_description',
           'published_at',
-          'is_show',
-          'is_ban_sell',
           'ban_drag',
           'player_pc',
           'duration',

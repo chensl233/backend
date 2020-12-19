@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     init() {
-        R.studentGrade.Edit({ grade_id: this.grade_id }).then(res => {
+        R.StudentGrade.Edit({ grade_id: this.grade_id }).then(res => {
           this.student_grade = res.data;
           let major_id = this.student_grade.major_id;
           let mould_id = this.student_grade.mould_id;

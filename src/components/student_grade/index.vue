@@ -167,7 +167,7 @@ export default {
       this.loading = true;
       let data = this.pagination;
       Object.assign(data, this.cond);
-      R.studentGrade.List(data).then(resp => {
+      R.StudentGrade.List(data).then(resp => {
         this.datas = resp.data.data;
         this.pagination.total = resp.data.total;
       });
@@ -189,7 +189,7 @@ export default {
         },
         events: {
           success: (modal, data) => {
-            R.studentGrade.Update(data).then(resp => {
+            R.StudentGrade.Update(data).then(resp => {
               modal.close();
               HeyUI.$Message.success('成功');
               this.getData();
