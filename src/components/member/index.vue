@@ -54,6 +54,7 @@
       <div class="float-box mb-10">
         <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="添加" @click="create()"></p-button>
         <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="memberImport()"></p-button>
+        <Button class="h-btn h-btn-s h-btn-primary" @click="exportExcel()">导出excel</Button>
       </div>
       <div class="float-box mb-10">
         <Table :loading="loading" :datas="datas" @sort="sortEvt">
@@ -90,8 +91,6 @@
             <template slot-scope="{ data }">
               <p-button glass="h-btn h-btn-s h-btn-primary" permission="member.edit" text="编辑" @click="edit(data)"></p-button>
               <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
-              <!-- <p-button glass="h-btn h-btn-s" permission="member.detail" text="详情" @click="detail(data)"></p-button>
-              <p-button glass="h-btn h-btn-s" permission="member.remark" text="备注" @click="showRemark(data)"></p-button> -->
             </template>
           </TableItem>
         </Table>
@@ -199,6 +198,23 @@ export default {
         }
       });
     },
+    exportExcel() {
+      this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./export'], resolve);
+          }
+        },
+        events: {
+          success: (modal, data) => {
+              modal.close();
+              this.getData(true);
+          }
+        }
+      });
+    },
     edit(item) {
       this.$Modal({
         closeOnMask: false,
@@ -273,7 +289,7 @@ export default {
         this.school_list = res.data.data;
         this.school_list.unshift({school_id:0,school_name:'通用'});
       });
-    }
+    },
   },
   filters:{
       level : (value)=>{

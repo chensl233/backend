@@ -256,6 +256,9 @@ const Request = {
     Import(param) {
       return Ajax.postJson('/member/import', param);
     },
+    Export(param) {
+      return Ajax.get('/member/exports', param);
+    },
     InviteBalanceWithdrawOrders(param) {
       return Ajax.get('/member/inviteBalance/withdrawOrders', param);
     },
