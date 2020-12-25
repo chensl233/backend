@@ -253,6 +253,9 @@ const Request = {
     Delete(param) {
       return Ajax.delete('/member/' + param.id);
     },
+    MultiDelete(param) {
+      return Ajax.post('/member/delete/multi',param);
+    },
     Import(param) {
       return Ajax.postJson('/member/import', param);
     },

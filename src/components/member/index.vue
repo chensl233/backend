@@ -54,10 +54,11 @@
       <div class="float-box mb-10">
         <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="添加" @click="create()"></p-button>
         <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="memberImport()"></p-button>
-        <Button class="h-btn h-btn-s h-btn-primary" @click="exportExcel()">导出excel</Button>
+        <p-button class="h-btn h-btn-s h-btn-primary" permission="member.store" text="导出excel" @click="memberExport()"></p-button>
+        <p-del-button permission="member.store" text="批量删除" @click="deleteSubmit()"></p-del-button>
       </div>
       <div class="float-box mb-10">
-        <Table :loading="loading" :datas="datas" @sort="sortEvt">
+        <Table :loading="loading" :checkbox="true" ref="table" :datas="datas" @sort="sortEvt">
           <TableItem title="所属院校" :width="180">
               <template slot-scope="{ data }">
                 <copytext  :copytext="data.school.school_name" />
@@ -198,7 +199,7 @@ export default {
         }
       });
     },
-    exportExcel() {
+    memberExport() {
       this.$Modal({
         closeOnMask: false,
         hasCloseIcon: true,
@@ -288,6 +289,21 @@ export default {
       R.School.List().then(res => {
         this.school_list = res.data.data;
         this.school_list.unshift({school_id:0,school_name:'通用'});
+      });
+    },
+    deleteSubmit() {
+      let items = this.$refs.table.getSelection();
+      if (items.length === 0) {
+        this.$Message.error('请选择需要删除的学员');
+        return;
+      }
+      let ids = [];
+      for (let i = 0; i < items.length; i++) {
+        ids.push(items[i].id);
+      }
+      R.Member.MultiDelete({ ids: ids }).then(resp => {
+        HeyUI.$Message.success('成功');
+        this.getData();
       });
     },
   },
