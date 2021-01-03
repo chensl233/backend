@@ -132,6 +132,7 @@ update() {
         let data = this.test;
         data.test_id = this.test_id;
         R.Test.Update(data).then(res=>{
+          HeyUI.$Message.success('保存成功');
           this.$emit('success', res);
         })
       }

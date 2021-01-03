@@ -379,6 +379,17 @@ const Request = {
     },
     Update(param) {
       return Ajax.putJson('/test/'+param.test_id,param);
+    },
+  },
+  TestUser: {
+    List(param) {
+      return Ajax.get('/testUser/'+param.test_id,param);
+    },
+    Delete(param) {
+      return Ajax.delete('/testUser/'+param.utest_id,param);
+    },
+    Store(param) {
+      return Ajax.postJson('/testUser/'+param.test_id,param);
     }
   },
   TeachProgress: {

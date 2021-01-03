@@ -39,10 +39,15 @@
                   <span v-else>通用</span>
                 </template>
             </TableItem>
+            <TableItem align="center" :width='180' title="适用学期" >
+                <template slot-scope="{ data }">
+                  {{data.term}}
+                </template>
+            </TableItem>
             <TableItem align="center" title="考试人数" :width='120' prop="user_test_count"></TableItem>
             <TableItem align="center" title="开始时间" :width='150' prop="start_time"></TableItem>
             <TableItem align="center" title="结束时间" :width='150' prop="end_time"></TableItem>
-            <TableItem align="center" title="创建人" prop="admin_id"></TableItem>
+            <TableItem align="center" title="创建人" :width='150' prop="admin_id"></TableItem>
             <TableItem align="center" title="创建时间" :width='150' prop="created_at"></TableItem>
             <TableItem align="center" title="状态" :width='90'>
                 <template slot-scope="{ data }">
@@ -53,6 +58,7 @@
             <TableItem title="操作" align="center" :width="240">
                 <template slot-scope="{ data }">
                     <p-button glass="h-btn h-btn-s h-btn-primary" permission="course.edit" text="编辑" @click="edit(data)"></p-button>
+                    <p-button glass="h-btn h-btn-s" permission="course.edit" text="考试设置" @click="detail(data)"></p-button>
                 </template>
           </TableItem>
         </Table>
@@ -113,7 +119,7 @@ export default {
             require(['./edit'], resolve);
           },
           datas: {
-            test_id: item.test_id
+            test_id: item.test_id,
           }
           
         },
@@ -125,6 +131,28 @@ export default {
         }
       });
     },
+    detail(item){
+        this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./detail'], resolve);
+          },
+          datas: {
+            test_id: item.test_id,
+            test_info: item
+          }
+          
+        },
+        events: {
+          success: (modal, data) => {
+            modal.close();
+            this.getData();
+          }
+        }
+      });
+    }
   },
   filters:{
       testType : (value)=>{
