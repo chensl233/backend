@@ -362,6 +362,25 @@ const Request = {
       return Ajax.post('/grade/import',param);
     }
   },
+  SsStudent: {
+    List(param) {
+      return Ajax.get('/ssStudent',param);
+    }
+  },
+  Test: {
+    List(param) {
+      return Ajax.get('/test',param);
+    },
+    Store(param) {
+      return Ajax.postJson('/test',param);
+    },
+    Edit(param) {
+      return Ajax.get('/test/'+param.test_id);
+    },
+    Update(param) {
+      return Ajax.putJson('/test/'+param.test_id,param);
+    }
+  },
   TeachProgress: {
     List(param) {
       return Ajax.get('/teachProgress',param);

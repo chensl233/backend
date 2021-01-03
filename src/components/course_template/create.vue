@@ -72,7 +72,6 @@ export default {
     return {
       schoolMould: {
         major_level: 1, //专业层次 1专 2本 3研究
-        term:1,
         major_id: null
       },
       major_level:[
@@ -80,18 +79,8 @@ export default {
         {id:2,name:'本科'},
         {id:3,name:'研究生'},
       ],
-      term:[
-        {id:1,name:'第一学期'},
-        {id:2,name:'第二学期'},
-        {id:3,name:'第三学期'},
-        {id:4,name:'第四学期'},
-        {id:5,name:'第五学期'},
-        {id:6,name:'第六学期'},
-        {id:7,name:'第七学期'},
-        {id:8,name:'第八学期'},
-      ],
       rules: {
-        required: ['school_id','major_id','mould_name','term']
+        required: ['school_id','major_id','mould_name']
       }, 
       major_list: [],
       school_list: [],

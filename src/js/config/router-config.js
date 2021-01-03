@@ -318,6 +318,11 @@ const initRouter = () => {
         name: 'loginDetail',
         component: (resolve) => require(['components/login_detail/index'],resolve),
         meta: { title: '登录日志'}
+      }, {
+        path: '/test',
+        name: 'test',
+        component: (resolve) => require(['components/test/index'],resolve),
+        meta: { title: '考试管理'}
       }
       , {
         path: '*',
