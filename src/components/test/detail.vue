@@ -163,9 +163,9 @@ export default {
         events: {
           success: (modal, data) => {
             modal.close();
-            R.School.SchoolMajorAdd(data).then(() => {
-              HeyUI.$Message.success('成功');
-            });
+            HeyUI.$Message.success('成功');
+            this.get_test_user();
+            
           }
         }
       });
