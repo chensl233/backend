@@ -47,7 +47,11 @@
             <TableItem align="center" title="考试人数" :width='120' prop="user_test_count"></TableItem>
             <TableItem align="center" title="开始时间" :width='150' prop="start_time"></TableItem>
             <TableItem align="center" title="结束时间" :width='150' prop="end_time"></TableItem>
-            <TableItem align="center" title="创建人" :width='150' prop="admin_id"></TableItem>
+            <TableItem align="center" title="创建人" :width='150'>
+              <template slot-scope="{ data }">
+                {{data.admin.name}}
+              </template>
+            </TableItem>
             <TableItem align="center" title="创建时间" :width='150' prop="created_at"></TableItem>
             <TableItem align="center" title="状态" :width='90'>
                 <template slot-scope="{ data }">

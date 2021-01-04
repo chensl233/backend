@@ -77,7 +77,7 @@ export default {
     },
     getUser() {
       if(this.testUser.school_id){
-        R.Member.List({school_id:this.testUser.school_id}).then(res => {
+        R.Member.List({school_id:this.testUser.school_id,size:233}).then(res => {
           this.user_list = res.data.data.data;
         })
       }
