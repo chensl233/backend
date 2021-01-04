@@ -1,7 +1,7 @@
 <template>
   <div class="table-basic-vue frame-page h-panel">
     <div class="h-panel-bar">
-      <span class="h-panel-title">课程模板</span>
+      <span class="h-panel-title">教学计划</span>
     </div>
     <div class="h-panel-body">
       <div class="mb-10">
@@ -14,7 +14,7 @@
             </Cell>
             <Cell :width="8">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="模板标题" />
+                <input type="text" v-model="cond.keywords" placeholder="计划标题" />
               </FormItem>
             </Cell>
 
@@ -28,13 +28,13 @@
         </Form>
       </div>
       <div class="mb-10">
-        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="course.store" text="添加模板" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="course.store" text="添加计划" @click="create()"></p-button>
         <!-- <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="coureMouldImport()"></p-button> -->
 
       </div>
       <Table :loading="loading" :datas="datas" @sort="sortEvt">
-        <TableItem prop="mould_id" title="模板ID"  :width="80"></TableItem>
-        <TableItem prop="mould_name" :width="300" title="模板名称"></TableItem>
+        <TableItem prop="mould_id" title="计划ID"  :width="80"></TableItem>
+        <TableItem prop="mould_name" :width="300" title="计划名称"></TableItem>
         <TableItem :width="200" title="适用院校">
             <template slot-scope="{ data }">
               {{data.school_name|nullToStr}}

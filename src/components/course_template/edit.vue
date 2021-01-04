@@ -2,7 +2,7 @@
 <template>
   <div class="h-panel w-800">
     <div class="h-panel-bar">
-      <span class="h-panel-title">添加模板</span>
+      <span class="h-panel-title">添加计划</span>
     </div>
     <div class="h-panel-body">
       <Form
@@ -52,8 +52,8 @@
         </Row>
         <Row :space="10">
           <Cell :width="16">
-            <FormItem label="模板名称" prop="mould_name">
-                <input type="text" v-model="schoolMould.mould_name" placeholder="例如:xx专业通用模板" />
+            <FormItem label="计划名称" prop="mould_name">
+                <input type="text" v-model="schoolMould.mould_name" placeholder="例如:xx专业通用计划" />
             </FormItem>
           </Cell>
         </Row>

@@ -67,7 +67,7 @@
         </Row>
 
         <FormItem label="考试说明" prop="remark">
-          <tinymce-editor v-model="test.remark"></tinymce-editor>
+          <textarea v-model="test.remark" rows="2"></textarea>
         </FormItem>
 
         <FormItem>
@@ -78,12 +78,8 @@
   </div>
 </template>
 <script>
-import TinymceEditor from '../common/tinymce';
-
-import Course from 'model/Course';
 
 export default {
-  components: { TinymceEditor },
   data() {
     return {
       test: {},
