@@ -323,6 +323,11 @@ const initRouter = () => {
         name: 'test',
         component: (resolve) => require(['components/test/index'],resolve),
         meta: { title: '考试管理'}
+      }, {
+        path: '/coursePlan',
+        name: 'coursePlan',
+        component: (resolve) => require(['components/course_plan/index'],resolve),
+        meta: { title: '教学进度管理'}
       }
       , {
         path: '*',

@@ -400,6 +400,14 @@ const Request = {
       return Ajax.get('/teachProgress/'+param.id+'/studentDetail',param);
     }
   },
+  CoursePlan: {
+    List(param) {
+      return Ajax.get('/coursePlan/',param);
+    },
+    Save(param) {
+      return Ajax.postJson('/coursePlan/'+param.course_id,param);
+    }
+  },
   Log: {
     loginDetail(param) {
       return Ajax.get('/log/loginDetail',param);

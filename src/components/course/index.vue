@@ -81,7 +81,7 @@
             <p-button glass="h-btn h-btn-s h-btn-primary" permission="course.edit" text="编辑" @click="edit(data)"></p-button>
             <p-button glass="h-btn h-btn-s" permission="course_chapter" text="章节" @click="goChapter(data)"></p-button>
             <p-button glass="h-btn h-btn-s" permission="course_attach" text="课件" @click="goCourseAttach(data)"></p-button>
-            <p-button glass="h-btn h-btn-s" permission="course.watchRecords" text="观看记录" @click="showWatchRecords(data)"></p-button>
+            <p-button glass="h-btn h-btn-s" permission="course.watchRecords" text="设置进度" @click="setCoursePlan(data)"></p-button>
           </template>
         </TableItem>
       </Table>
@@ -260,6 +260,20 @@ export default {
         component: {
           vue: resolve => {
             require(['./watch_records'], resolve);
+          },
+          datas: {
+            id: item.id
+          }
+        }
+      });
+    },
+    setCoursePlan(item) {
+            this.$Modal({
+        closeOnMask: false,
+        hasCloseIcon: true,
+        component: {
+          vue: resolve => {
+            require(['./course_plan'], resolve);
           },
           datas: {
             id: item.id

@@ -73,7 +73,7 @@
         </FormItem>
 
         <FormItem label="详细介绍" prop="original_desc">
-          <tinymce-editor v-model="course.original_desc"></tinymce-editor>
+          <Editorbar v-model="course.original_desc"></Editorbar>
         </FormItem>
 
         <FormItem label="SEO描述" prop="seo_description">
@@ -91,12 +91,12 @@
   </div>
 </template>
 <script>
-import TinymceEditor from '../common/tinymce';
+import Editorbar from '../common/wangEditor';
 
 import Course from 'model/Course';
 
 export default {
-  components: { TinymceEditor },
+  components: { Editorbar },
   data() {
     return {
       course: {

@@ -7,7 +7,7 @@
 }
 .text {
   border: 1px solid #ccc;
-  height: 144px;
+  height: 500px;
 }
 </style>
 <template>
@@ -91,6 +91,19 @@ export default {
 
       this.editor.txt.html(this.value);
     }
-  }
+  },
+   watch:{
+      isClear(val){
+        // 触发清除文本域内容
+        if(val){
+          this.editor.txt.clear();
+          this.info = '';
+        }
+      },
+      value(val){
+        // 使用v-model时，设置初始值
+        this.editor.txt.html(val);
+      }
+    }
 };
 </script>
