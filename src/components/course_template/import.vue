@@ -6,7 +6,7 @@
     <div class="h-panel-body">
       <div class="float-box mb-30">
         <!-- <a href="http://work3.com/excelMould/import_grade_mould.xlsx" target="_blank">导入模板下载</a> -->
-        <a href="/excelMould/import_grade_mould.xlsx" target="_blank">导入模板下载</a>
+        <a href="/excelMould/import_courseMould_mould.xlsx" target="_blank">导入模板下载</a>
       </div>
       <div class="float-box mb-30">
         <Button color="primary" @click="$refs.xlsfile.click()">选择excel文件，支持：xls,xlsx格式文件</Button>

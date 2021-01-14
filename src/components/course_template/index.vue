@@ -29,7 +29,7 @@
       </div>
       <div class="mb-10">
         <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="course.store" text="添加计划" @click="create()"></p-button>
-        <!-- <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="coureMouldImport()"></p-button> -->
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="member.store" text="批量导入" @click="coureMouldImport()"></p-button>
 
       </div>
       <Table :loading="loading" :datas="datas" @sort="sortEvt">

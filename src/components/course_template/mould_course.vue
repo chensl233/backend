@@ -48,10 +48,26 @@
             <TableItem prop="study_time1" title="面授学时"></TableItem>
             <TableItem prop="study_time2" title="自学学时"></TableItem>
             <TableItem prop="study_time3" title="实践学时"></TableItem>
-            <TableItem prop="is_network" title="是否网络课"></TableItem>
-            <TableItem prop="is_thesis" title="是否论文课"></TableItem>
-            <TableItem prop="is_check" title="是否考察课"></TableItem>
-            <TableItem prop="is_graduate" title="是否毕业课"></TableItem>
+            <TableItem title="是否网络课">
+              <template slot-scope="{data}">
+                {{data.is_network|yesOrNo}}
+              </template>
+            </TableItem>
+            <TableItem title="是否论文课">
+              <template slot-scope="{data}">
+                {{data.is_thesis|yesOrNo}}
+              </template>
+            </TableItem>
+            <TableItem title="是否考察课">
+              <template slot-scope="{data}">
+                {{data.is_check|yesOrNo}}
+              </template>
+            </TableItem>
+            <TableItem title="是否毕业课">
+              <template slot-scope="{data}">
+                {{data.is_graduate|yesOrNo}}
+              </template>
+            </TableItem>
             <TableItem title="课程类型">
               <template slot-scope="{ data }">
                 {{data.course_type|courseToType}}
@@ -190,6 +206,12 @@ export default {
             return '选修';
             break;
         }
+      },
+      yesOrNo: (v)=>{
+        if(v==1)
+          return '是';
+        else
+          return '否';
       }
   }
 };

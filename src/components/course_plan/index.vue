@@ -26,7 +26,6 @@
           </template>
         </TableItem>
       </Table>
-      <p></p>
       <Pagination v-if="pagination.total > 0" align="right" v-model="pagination" @change="changePage" />
     </div>
   </div>
