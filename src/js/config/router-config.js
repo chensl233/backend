@@ -328,8 +328,12 @@ const initRouter = () => {
         name: 'coursePlan',
         component: (resolve) => require(['components/course_plan/index'],resolve),
         meta: { title: '教学进度管理'}
-      }
-      , {
+      }, {
+        path: '/examLibrary',
+        name: 'examLibrary',
+        component: (resolve) => require(['components/exam_library/index'],resolve),
+        meta: { title: '题库管理'}
+      }, {
         path: '*',
         name: 'CommonNotfoundError',
         component: (resolve) => require(['components/error-pages/404'], resolve),

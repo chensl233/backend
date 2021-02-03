@@ -367,7 +367,7 @@ const Request = {
       return Ajax.get('/ssStudent',param);
     }
   },
-  Test: {
+  Test: { //考试管理
     List(param) {
       return Ajax.get('/test',param);
     },
@@ -381,7 +381,7 @@ const Request = {
       return Ajax.putJson('/test/'+param.test_id,param);
     },
   },
-  TestUser: {
+  TestUser: { //考生管理
     List(param) {
       return Ajax.get('/testUser/'+param.test_id,param);
     },
@@ -390,6 +390,17 @@ const Request = {
     },
     Store(param) {
       return Ajax.postJson('/testUser/'+param.test_id,param);
+    }
+  },
+  ExamLibrary: { //题库管理
+    List(param) {
+      return Ajax.get('/examLibrary',param);
+    },
+    Store(param) {
+      return Ajax.postJson('/examLibrary',param);
+    },
+    Delete(param) {
+      return Ajax.delete('/examLibrary/'+param.lib_id);
     }
   },
   TeachProgress: {
