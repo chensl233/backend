@@ -414,10 +414,10 @@ const Request = {
       return Ajax.postJson('/examQuestion/'+param.lib_id,param);
     },
     Update(param) {
-      return Ajax.putJson('/examQuestion/'+param.lib_id,param);
+      return Ajax.putJson('/examQuestion/'+param.question_id,param);
     },
     Delete(param) {
-      return Ajax.delete('/examQuestion/'+param.lib_id,param);
+      return Ajax.delete('/examQuestion/'+param.question_id,param);
     }
   },
   TeachProgress: {
