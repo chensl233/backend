@@ -50,7 +50,6 @@ export default {
     return {
       mode: 'single',
       data: {
-        inputData: '',
         title: '',
         analysis:'',
         checkboxData: [1],

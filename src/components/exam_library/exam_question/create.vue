@@ -27,7 +27,7 @@
             </Row>
           </FormItem>
         <FormItem single>
-          <Button size="s" text-color="blue" @click="add">添加输入框</Button>
+          <Button size="s" text-color="blue" @click="add">添加选项</Button>
         </FormItem>
           <FormItem label="答案" prop="expect">
             <Radio v-model="data.expect" :key='fill_count' :datas="answerData"></Radio>
@@ -50,7 +50,6 @@ export default {
     return {
       mode: 'single',
       data: {
-        inputData: '',
         title: '',
         analysis:'',
         checkboxData: [1],
@@ -100,7 +99,7 @@ export default {
         });
       }
     },
-    add() { //添加输入框
+    add() { //添加选项
       let key = this.data.choicesData.length+1;
       let flag = String.fromCharCode(64 + parseInt(key));
       this.fill_count = key;
