@@ -213,7 +213,7 @@ const Request = {
     },
     Delete(param) {
       return Ajax.postJson('/course_comment/delete', param);
-    }
+    },
   },
   VideoComment: {
     List(param) {
@@ -399,8 +399,25 @@ const Request = {
     Store(param) {
       return Ajax.postJson('/examLibrary',param);
     },
+    Update(param) {
+      return Ajax.putJson('/examLibrary/'+param.lib_id,param);
+    },
     Delete(param) {
       return Ajax.delete('/examLibrary/'+param.lib_id);
+    }
+  },
+  ExamQuestion: { //试题管理
+    List(param) {
+      return Ajax.get('/examQuestion/'+param.lib_id,param);
+    },
+    Store(param) {
+      return Ajax.postJson('/examQuestion/'+param.lib_id,param);
+    },
+    Update(param) {
+      return Ajax.putJson('/examQuestion/'+param.lib_id,param);
+    },
+    Delete(param) {
+      return Ajax.delete('/examQuestion/'+param.lib_id,param);
     }
   },
   TeachProgress: {

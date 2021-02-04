@@ -23,11 +23,11 @@
         </Form>
       </div>
       <div class="float-box mb-10">
-        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="school.store" text="添加题库" @click="create()"></p-button>
+        <!-- <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="school.store" text="添加题库" @click="create()"></p-button> -->
       </div>
       <div class="float-box mb-10">
          <Table :datas="test_list" >
-            <TableItem align="center" title="题库名称" :width='200' prop="title"></TableItem>
+            <TableItem align="center" title="试题名称" :width='200' prop="title"></TableItem>
             <TableItem align="center" title="试题数量" :width='80' prop="question_count"></TableItem>
             <TableItem align="center" title="单选题" :width='50' prop="single_count"></TableItem>
             <TableItem align="center" title="多选题" :width='50' prop="multiple_count"></TableItem>
@@ -43,9 +43,7 @@
             <div slot="empty">暂时无数据</div>
             <TableItem title="操作" align="center" :width="240">
                 <template slot-scope="{ data }">
-                    <p-button glass="h-btn h-btn-s h-btn-primary" permission="course.edit" text="编辑" @click="edit(data)"></p-button>
                     <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
-                    <p-button glass="h-btn h-btn-s" permission="course.edit" text="试题管理" @click="examQuestion(data)"></p-button>
                 </template>
           </TableItem>
         </Table>
@@ -58,6 +56,7 @@
 </template>
 <script>
 export default {
+  props: ['item'],
   data() {
     return {
         test_list:[],
@@ -66,13 +65,15 @@ export default {
     };
   },
   mounted() {
+      console.log(this.item);
+      this.pagination = this.item;
       this.getData();
   },
   methods: {
     getData(){
         let data = this.pagination;
         data.title = this.cond.title;
-        R.ExamLibrary.List(data).then((res)=>{
+        R.ExamQuestion.List(data).then((res)=>{
             this.test_list = res.data.data;
             this.pagination.total = res.data.total;
         });
@@ -80,74 +81,11 @@ export default {
     changePage() {
       this.getData();
     },
-    create(){
-        this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./create'], resolve);
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    },
-    edit(item){
-        this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./edit'], resolve);
-          },
-          datas: {
-            item: {
-              title:item.title,
-              lib_id:item.lib_id,
-            },
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    },
-    examQuestion(item){
-        this.$Modal({
-        closeOnMask: false,
-        hasCloseIcon: true,
-        component: {
-          vue: resolve => {
-            require(['./exam_question/index'], resolve);
-          },
-          datas: {
-            item: {
-              title:item.title,
-              lib_id:item.lib_id,
-            },
-          }
-        },
-        events: {
-          success: (modal, data) => {
-            modal.close();
-            this.getData();
-          }
-        }
-      });
-    },
     remove(item){
-      R.ExamLibrary.Delete({ lib_id: item.lib_id }).then(resp => {
-        HeyUI.$Message.success('成功');
-        this.getData(true);
-      });
+    //   R.ExamLibrary.Delete({ lib_id: item.lib_id }).then(resp => {
+    //     HeyUI.$Message.success('成功');
+    //     this.getData(true);
+    //   });
     }
   },
   filters:{
