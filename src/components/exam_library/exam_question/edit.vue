@@ -6,7 +6,7 @@
     <div class="h-panel-body">
       <Form :label-width="130" :mode="mode" :model="data" :rules="validationRules" ref="form" :top="0.2" showErrorTip>
         <FormItem label="题目" :single="true" prop="title">
-          <textarea rows="3" v-autosize v-wordcount="50" v-model="data.title"></textarea>
+          <textarea rows="3" v-autosize v-wordcount="2000" v-model="data.title"></textarea>
         </FormItem>
         <!-- <FormItem label="Multiple" prop="checkboxData">
           <Checkbox v-model="data.checkboxData" :datas="answerData"></Checkbox>
@@ -65,7 +65,7 @@ export default {
       validationRules: {
         rules: {
           title: {
-            maxLen: 50,
+            maxLen: 2000,
             minLen: 5
           },
         },
