@@ -1,7 +1,7 @@
 <template>
   <div class="table-basic-vue frame-page h-panel h-panel-margin-0 w-800">
     <div class="h-panel-bar">
-      <span class="h-panel-title">新增试题</span>
+      <span class="h-panel-title">编辑试题</span>
     </div>
     <div class="h-panel-body">
       <Form :label-width="130" :mode="mode" :model="data" :rules="validationRules" ref="form" :top="0.2" showErrorTip>
