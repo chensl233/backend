@@ -87,8 +87,8 @@ export default {
   data() {
 	  let format_data=Object.assign({},format)
     return {
-		loading:true,
-		daanTxt:'答案',
+      loading:true,
+      daanTxt:'答案',
       tabs: {
         single: '单选题',
         multiple: '多选题',
@@ -150,7 +150,7 @@ export default {
           title:this.data.title,
           type:this.selectTab,
         };
-        console.log(data)
+        // console.log(data)
         R.ExamQuestion.Store(data).then(resp => {
           HeyUI.$Message.success('添加成功');
           this.$emit('success');
@@ -185,21 +185,21 @@ export default {
     //   delete this.answerData[key+1];
     },
     tabChange(data) {
-		let that = this;
-		this.loading = true;
-		format.choicesData=["",""]
-		format.choicesKey=["A", "B",]
-		format.fillData=[]
-		this.data = Object.assign({},format)
-		if(data.key == "open"){
-			this.daanTxt='得分关键词'
-		}else{
-			this.daanTxt='答案'
-		}
-      	this.selectTab = data.key
-		setTimeout(function(){
-			that.loading = false;
-		},500);
+      let that = this;
+      this.loading = true;
+      format.choicesData=["",""]
+      format.choicesKey=["A", "B",]
+      format.fillData=[]
+      this.data = Object.assign({},format)
+      if(data.key == "open"){
+        this.daanTxt='得分关键词'
+      }else{
+        this.daanTxt='答案'
+      }
+          this.selectTab = data.key
+      setTimeout(function(){
+        that.loading = false;
+      },500);
     },
   }
 };
