@@ -66,7 +66,7 @@ export default {
   methods: {
     getData(){
         let data = this.pagination;
-        data.title = this.cond.title;
+        data.lib_id = this.item.lib_id;
         R.ExamQuestion.List(data).then((res)=>{
             this.test_list = res.data.data;
             this.pagination.total = res.data.total;
