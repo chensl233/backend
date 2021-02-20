@@ -130,7 +130,6 @@ export default {
           },
           datas: {
             item: {
-              title:item.title,
               lib_id:item.lib_id,
             },
           }

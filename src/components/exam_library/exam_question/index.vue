@@ -9,7 +9,7 @@
           <Row :space="10">
             <Cell :width="6">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.title" placeholder="试题名称" />
+                <input type="text" v-model="pagination.title" placeholder="试题名称" />
               </FormItem>
             </Cell>
 
