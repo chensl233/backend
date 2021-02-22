@@ -58,9 +58,9 @@ export default {
         }
         // 请求导入api
         this.$refs.form.reset();
+        parseData = JSON.stringify(parseData);
         R.CourseMould.Import({ data: parseData }).then(res => {
-          HeyUI.$Message.success('导入成功');
-          this.$emit('success');
+          this.$emit('success', res);
         });
       };
       reader.readAsArrayBuffer(f);

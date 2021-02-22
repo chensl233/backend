@@ -191,7 +191,6 @@ export default {
             mould_id: item.mould_id
           }
         },
-        
         events: {
           success: (modal, data) => {
             modal.close();
@@ -210,12 +209,11 @@ export default {
             require(['./import'], resolve);
           },
         },
-        
         events: {
           success: (modal, data) => {
-            // modal.close();
-            // HeyUI.$Message.success('成功');
-            // this.getData(true);
+            modal.close();
+            HeyUI.$Message.success('导入成功');
+            this.getData(true);
           }
         }
       });
