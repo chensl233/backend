@@ -110,7 +110,7 @@ export default {
       loading: false,
       categories: [],
       major_level:[
-        {id:1,name:'专科'},
+        {id:1,name:'大专'},
         {id:2,name:'本科'},
         {id:3,name:'研究生'},
       ],
@@ -143,7 +143,7 @@ export default {
       level : (value)=>{
         switch(value){
           case 1:
-            return '专科';
+            return '大专';
             break;
           case 2:
             return '本科';

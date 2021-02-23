@@ -100,7 +100,7 @@ export default {
       intToType : (value)=>{
         switch (value) {
           case 1:
-            return '专科';
+            return '大专';
             break;
         case 2:
             return '本科';
@@ -109,7 +109,7 @@ export default {
             return '研究生';
             break;
           default:
-            return '专科';
+            return '大专';
             break;
         }
       }

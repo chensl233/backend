@@ -148,7 +148,7 @@ export default {
         }
       ],
       major_level:[
-        {id:1,name:'专科'},
+        {id:1,name:'大专'},
         {id:2,name:'本科'},
         {id:3,name:'研究生'},
       ],
