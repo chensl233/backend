@@ -58,7 +58,7 @@
 				</FormItem>
 			</FormItem>
 			<FormItem label="答案解析" :single="true" prop="analysis">
-				<textarea rows="3" v-autosize v-wordcount="50" v-model="data.analysis"></textarea>
+				<textarea rows="3" v-autosize v-wordcount="2000" v-model="data.analysis"></textarea>
 			</FormItem>
         <FormItem :no-padding="true" single>
           <Button color="primary" :loading="isLoading" @click="create" >提交</Button>
