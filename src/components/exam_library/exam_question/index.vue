@@ -23,7 +23,7 @@
         </Form>
       </div>
       <div class="float-box mb-10">
-        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="school.store" text="添加试题" @click="create()"></p-button>
+        <p-button glass="h-btn h-btn-primary h-btn-s" icon="h-icon-plus" permission="examQuestion.store" text="添加试题" @click="create()"></p-button>
       </div>
       <div class="float-box mb-10">
          <Table :datas="test_list" >
@@ -37,8 +37,8 @@
             <div slot="empty">暂时无数据</div>
             <TableItem title="操作" align="center" :width="240">
                 <template slot-scope="{ data }">
-                    <p-button glass="h-btn h-btn-s" permission="member.tags" text="编辑" @click="edit(data)"></p-button>
-                    <p-del-button glass="h-btn h-btn-s" permission="member.tags" text="删除" @click="remove(data)"></p-del-button>
+                    <p-button glass="h-btn h-btn-s" permission="examQuestion.edit" text="编辑" @click="edit(data)"></p-button>
+                    <p-del-button glass="h-btn h-btn-s" permission="examQuestion.delete" text="删除" @click="remove(data)"></p-del-button>
                 </template>
           </TableItem>
         </Table>

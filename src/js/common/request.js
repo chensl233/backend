@@ -420,6 +420,14 @@ const Request = {
       return Ajax.delete('/examQuestion/'+param.question_id,param);
     }
   },
+  ExamPaper: { //试卷管理
+    List(param) {
+      return Ajax.get('/examPaper',param);
+    },
+    Store(param) {
+      return Ajax.postJson('/examPaper',param);
+    }
+  },
   TeachProgress: {
     List(param) {
       return Ajax.get('/teachProgress',param);

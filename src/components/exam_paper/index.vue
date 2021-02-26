@@ -72,7 +72,7 @@ export default {
     getData(){
         let data = this.pagination;
         data.title = this.cond.title;
-        R.ExamLibrary.List(data).then((res)=>{
+        R.ExamPaper.List(data).then((res)=>{
             this.test_list = res.data.data;
             this.pagination.total = res.data.total;
         });
