@@ -334,6 +334,11 @@ const initRouter = () => {
         component: (resolve) => require(['components/exam_library/index'],resolve),
         meta: { title: '题库管理'}
       }, {
+        path: '/examPaper',
+        name: 'examPaper',
+        component: (resolve) => require(['components/exam_paper/index'],resolve),
+        meta: { title: '试题管理'}
+      },{
         path: '*',
         name: 'CommonNotfoundError',
         component: (resolve) => require(['components/error-pages/404'], resolve),
