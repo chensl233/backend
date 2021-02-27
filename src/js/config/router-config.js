@@ -381,6 +381,17 @@ const initRouter = () => {
       layoutContent.scrollTop = 0;
     }
   });
+  router.onError((error) => { //监听错误信息
+    const pattern = /Loading chunk (\d)+ failed/g;
+    const isChunkLoadFailed = error.message.match(pattern);
+    if (isChunkLoadFailed) {
+      window.location.reload();
+      // router.replace(router.history.pending.fullPath);
+    }else{
+      console.log(error)
+    }
+  });
+  
   return router;
 };
 

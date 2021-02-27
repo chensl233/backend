@@ -1,7 +1,7 @@
 <template>
   <div class="h-panel w-1000">
     <div class="h-panel-bar">
-      <span class="h-panel-title">成绩批量导入</span>
+      <span class="h-panel-title">课程模板批量导入</span>
     </div>
     <div class="h-panel-body">
       <div class="float-box mb-30">

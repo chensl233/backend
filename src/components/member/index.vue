@@ -288,7 +288,7 @@ export default {
     getSchool() {
       R.School.List().then(res => {
         this.school_list = res.data.data;
-        this.school_list.unshift({school_id:0,school_name:'通用'});
+        this.school_list.unshift({school_id:0,school_name:'全部'});
       });
     },
     deleteSubmit() {

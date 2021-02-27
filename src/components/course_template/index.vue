@@ -8,13 +8,19 @@
         <Form>
           <Row :space="10">
             <Cell :width="8">
-              <FormItem label="搜索">
-                <input type="text" v-model="cond.school_name" placeholder="院校名称" />
+              <FormItem label="院校">
+                <Select
+                v-model="cond.school_id"
+                :datas="school_list"
+                keyName="school_id"
+                titleName="school_name"
+                :filterable="true" 
+                ></Select>
               </FormItem>
             </Cell>
             <Cell :width="8">
               <FormItem label="搜索">
-                <input type="text" v-model="cond.keywords" placeholder="计划标题" />
+                <input type="text" v-model="cond.mould_name" placeholder="计划标题" />
               </FormItem>
             </Cell>
 
@@ -55,7 +61,7 @@
               {{data.course_mould_count}}
             </template>
         </TableItem>
-        <TableItem prop="created_at" :width="110" title="创建时间"></TableItem>
+        <TableItem prop="created_at" :width="150" title="创建时间"></TableItem>
         
         <TableItem title="操作" align="center" :width="350">
           <template slot-scope="{ data }">
@@ -80,18 +86,20 @@ export default {
         total: 0
       },
       cond: {
-        keywords: '',
+        mould_name: '',
         cid: null,
         sort: 'created_at',
         order: 'desc',
         id: null
       },
       datas: [],
+      school_list:{},
       loading: false,
     };
   },
   mounted() {
     this.getData(true);
+    this.getSchool();
   },
   filters:{
       nullToStr : (value)=>{
@@ -101,16 +109,12 @@ export default {
         switch (value) {
           case 1:
             return '大专';
-            break;
         case 2:
             return '本科';
-            break;
         case 3:
             return '研究生';
-            break;
           default:
             return '大专';
-            break;
         }
       }
   },
@@ -124,10 +128,16 @@ export default {
       this.getData();
     },
     reset() {
-      this.cond.keywords = null;
+      this.cond.mould_name = null;
       this.cond.cid = null;
       this.cond.id = null;
       this.getData(true);
+    },
+    getSchool() {
+      R.School.List().then(res => {
+        this.school_list = res.data.data;
+        this.school_list.unshift({school_id:0,school_name:'全部'});
+      });
     },
     getData(reload = false) {
       if (reload) {

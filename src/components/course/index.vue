@@ -73,8 +73,7 @@
               {{data.is_graduate|intToStr}}
             </template>
         </TableItem>
-        
-
+        <TableItem prop="mould_course_count" :width='100' title="关联模板数"></TableItem>
         <TableItem title="操作" align="center" :width="350">
           <template slot-scope="{ data }">
             <p-del-button permission="course.destroy" @click="remove(datas, data)"></p-del-button>

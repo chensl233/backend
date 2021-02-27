@@ -8,6 +8,17 @@
         <Form>
           <Row :space="10">
             <Cell :width="6">
+              <FormItem label="院校">
+                <Select
+                v-model="cond.school_id"
+                :datas="school_list"
+                keyName="school_id"
+                titleName="school_name"
+                :filterable="true" 
+                ></Select>
+              </FormItem>
+            </Cell>
+            <Cell :width="6">
               <FormItem label="搜索">
                 <input type="text" v-model="cond.student_sn" placeholder="姓名/学号" />
               </FormItem>
@@ -76,11 +87,13 @@ export default {
     return {
         student_list:[],
         pagination:{},
+        school_list:{},
         cond:{},
     };
   },
   mounted() {
       this.getData();
+      this.getSchool();
   },
   methods: {
     getData(){
@@ -90,6 +103,12 @@ export default {
             this.student_list = res.data.data;
             this.pagination.total = res.data.total;
         });
+    },
+    getSchool() {
+      R.School.List().then(res => {
+        this.school_list = res.data.data;
+        this.school_list.unshift({school_id:0,school_name:'全部'});
+      });
     },
     changePage() {
       this.getData();
@@ -120,13 +139,10 @@ export default {
         switch(value){
           case 1:
             return '大专';
-            break;
           case 2:
             return '本科';
-            break;
           case 3:
             return '研究生';
-            break;
         }
       },
       SecondToDate: function (msd) {
